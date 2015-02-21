@@ -1,6 +1,6 @@
 package model;
 
-public class ConfuzionValuesWrapper {
+public class ConfusionValuesWrapper {
 	private double truePositive = 0d;
 	private double trueNegative = 0d;
 	private double falsePositive = 0d;

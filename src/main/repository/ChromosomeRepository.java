@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 import learning.ChromosomeOperator;
-import learning.FitnessCalculator;
-import learning.WmwFitnessCalculator;
+import fitness.FitnessCalculator;
+import fitness.WmwFitnessCalculator;
 import model.Chromosome;
 import model.Radiography;
 
@@ -21,20 +21,20 @@ public class ChromosomeRepository {
 	private final Random r;
 	private final FitnessCalculator fitnessCalculator;
 
-	public ChromosomeRepository(Random r) {
+	public ChromosomeRepository(Random r, ChromosomeOperator chromosomeOperator) {
 		this.r = r;
-		fitnessCalculator = new WmwFitnessCalculator();
+		fitnessCalculator = new WmwFitnessCalculator(chromosomeOperator);
 		population = new ArrayList<Chromosome>();
-		initPopulation();
+		initPopulation(chromosomeOperator);
 	}
 
 	// initialize population with the method ramped half-half
-	private void initPopulation() {
+	private void initPopulation(ChromosomeOperator chromosomeOperator) {
 		for (int i = 0; i < POPULATION_NUMBER / 2; i++) {
-			population.add(ChromosomeOperator.createChromosome(
-					ChromosomeOperator.MAX_CHROMOSOME_DEPTH, r, false));
-			population.add(ChromosomeOperator.createChromosome(
-					ChromosomeOperator.MAX_CHROMOSOME_DEPTH, r, true));
+			population.add(chromosomeOperator.createChromosome(
+					chromosomeOperator.MAX_CHROMOSOME_DEPTH, r, false));
+			population.add(chromosomeOperator.createChromosome(
+					chromosomeOperator.MAX_CHROMOSOME_DEPTH, r, true));
 		}
 	}
 

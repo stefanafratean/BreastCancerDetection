@@ -13,11 +13,13 @@ public class Learner {
 	private final ChromosomeRepository chromosomeRepository;
 	private final RadiographyRepository radiographyRepository;
 	private boolean changed = false;
+	private ChromosomeOperator chromosomeOperator;
 
 	public Learner(ChromosomeRepository chromosomeRepository,
-			RadiographyRepository radiographyRepository, Random r) {
+				   RadiographyRepository radiographyRepository, ChromosomeOperator chromosomeOperator, Random r) {
 		this.chromosomeRepository = chromosomeRepository;
 		this.radiographyRepository = radiographyRepository;
+		this.chromosomeOperator = chromosomeOperator;
 		this.r = r;
 	}
 
@@ -39,7 +41,7 @@ public class Learner {
 			}
 		}
 		
-//		chromosomeRepository.setPopulationFitness(radiographyRepository.getValidationRadiographies());
+		chromosomeRepository.setPopulationFitness(radiographyRepository.getValidationRadiographies());
 		return chromosomeRepository.getBestChromosome();
 	}
 
@@ -57,9 +59,9 @@ public class Learner {
 		Chromosome offspring;
 		Chromosome mother = chromosomeRepository.selectParent();
 		Chromosome father = chromosomeRepository.selectParent();
-		offspring = ChromosomeOperator.xo(mother, father, r);
+		offspring = chromosomeOperator.xo(mother, father, r);
 		if (r.nextDouble() > 0.9) {
-			offspring = ChromosomeOperator.mutation(offspring, r);
+			offspring = chromosomeOperator.mutation(offspring, r);
 		}
 		return offspring;
 	}
@@ -68,7 +70,6 @@ public class Learner {
 		if (chromosomeRepository.chromosomeIsWorthy(offspring)) {
 			chromosomeRepository.addChromosome(offspring);
 			changed = true;
-			// chromosomeRepository.evaluatePopulation();
 		}
 	}
 }

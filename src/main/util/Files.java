@@ -6,19 +6,6 @@ public class Files {
 	private String file;
 
 	public Files() {
-		String DDSMTrain = "ddsm/DDSMTrain.txt";
-		String DDSMTest = "ddsm/DDSMTest.txt";
-
-		String BCDRTrain = "bcdr/BCDRTrain.txt";
-		String BCDRTest = "bcdr/BCDRTest.txt";
-
-		String BCDRFilmTrain = "bcdr_film/BCDRFilmTrain.txt";
-		String BCDRFilmTest = "bcdr_film/BCDRFilmTest.txt";
-
-		String BCDRFilmTuTrain = "bcdr_film_tumors/BCDRFilmTuTrain.txt";
-		String BCDRFilmTuTest = "bcdr_film_tumors/BCDRFilmTuTest.txt"; 
-		
-
 		String MIASTrain = "mias/MIASTrain.txt";
 		String MIASTest = "mias/MIASTest.txt";
 		

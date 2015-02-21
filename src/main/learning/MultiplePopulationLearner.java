@@ -14,9 +14,11 @@ public class MultiplePopulationLearner {
 	private List<ChromosomeRepository> subPopulations;
 	private RadiographyRepository radiographyRepository;
 	private Random r;
+	private ChromosomeOperator chromosomeOperator;
 
 	public MultiplePopulationLearner(
-			RadiographyRepository radiographyRepository, Random r) {
+			RadiographyRepository radiographyRepository, Random r, ChromosomeOperator chromosomeOperator) {
+		this.chromosomeOperator = chromosomeOperator;
 		subPopulations = new ArrayList<ChromosomeRepository>();
 		this.r = r;
 		this.radiographyRepository = radiographyRepository;
@@ -87,7 +89,7 @@ public class MultiplePopulationLearner {
 		List<Chromosome> bestPerEpoch = new ArrayList<Chromosome>();
 		for (ChromosomeRepository subPopulation : subPopulations) {
 			Learner learner = new Learner(subPopulation, radiographyRepository,
-					r);
+					chromosomeOperator, r);
 			bestPerEpoch.add(learner.findBestChromosome());
 		}
 
@@ -96,7 +98,7 @@ public class MultiplePopulationLearner {
 
 	private void initializeSubPopulations() {
 		for (int i = 0; i < subPopulationsNo; i++) {
-			subPopulations.add(new ChromosomeRepository(r));
+			subPopulations.add(new ChromosomeRepository(r, chromosomeOperator));
 		}
 	}
 
