@@ -47,7 +47,7 @@ public class TerminalOperator {
     public double getMappedValue(Radiography radiography, Integer index) {
         int cumulatedSize = 0;
 
-        List<Double> descriptors = radiography.getDescriptors();
+        List<Double> descriptors = radiography.getFeatures();
         if (index < descriptors.size()) {
             return descriptors.get(index - cumulatedSize);
         }
