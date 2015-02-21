@@ -10,14 +10,18 @@ import util.Tree;
 
 import java.util.Random;
 
-import static learning.TerminalHelper.generateTerminal;
-import static learning.TerminalHelper.shouldAddTerminal;
 import static model.functions.FunctionHelper.generateFunction;
 
 public class ChromosomeOperator {
     private boolean switchFlag;
-    public final int MAX_CHROMOSOME_DEPTH = (int) (Math.round(Math
-            .log(TerminalHelper.NB_OF_TERMINALS) / Math.log(2)));
+    private TerminalOperator terminalOperator;
+    public final int MAX_CHROMOSOME_DEPTH;
+
+    public ChromosomeOperator(TerminalOperator terminalOperator) {
+        this.terminalOperator = terminalOperator;
+        MAX_CHROMOSOME_DEPTH = (int) (Math.round(Math
+                .log(terminalOperator.getNumberOfTerminals()) / Math.log(2)));
+    }
 
     public Chromosome xo(Chromosome mother, Chromosome father, Random r) {
 
@@ -84,8 +88,8 @@ public class ChromosomeOperator {
     }
 
     private boolean addTerminalAndCheckIfFull(int maxDepth, int currentDepth, Random r, Node<Integer> currentNode, boolean isFull) {
-        if (currentDepth != 0 && (shouldAddTerminal(r, isFull) || currentDepth == maxDepth)) {
-            currentNode.setData(generateTerminal(r));
+        if (currentDepth != 0 && (terminalOperator.shouldAddTerminal(r, isFull) || currentDepth == maxDepth)) {
+            currentNode.setData(terminalOperator.generateTerminal(r));
             return true;
         }
         return false;
@@ -104,7 +108,7 @@ public class ChromosomeOperator {
     private double getOutputValue(Node<Integer> node,
                                   Radiography radiography) {
         if (!FunctionHelper.nodeIsFunction(node)) {
-            return TerminalHelper.getMappedValue(radiography, node.getData());
+            return terminalOperator.getMappedValue(radiography, node.getData());
         } else {
             Function f = FunctionHelper.getFunction(node.getData());
 
@@ -117,7 +121,7 @@ public class ChromosomeOperator {
     private int getDifferentTerminal(int current, Random r) {
         int newTerminal;
         while (true) {
-            newTerminal = TerminalHelper.generateTerminal(r);
+            newTerminal = terminalOperator.generateTerminal(r);
             if (current != newTerminal) {
                 return newTerminal;
             }
@@ -149,7 +153,7 @@ public class ChromosomeOperator {
             Node<Integer> childNode = new Node<Integer>();
             childNode.setParent(parentNode1.getParent());
             if (maxAllowedDepthAndFunction(parentNode1, currentDepth)) {
-                childNode.setData(TerminalHelper.generateTerminal(r));
+                childNode.setData(terminalOperator.generateTerminal(r));
                 childNode.setLeft(null);
                 childNode.setRight(null);
                 return childNode;

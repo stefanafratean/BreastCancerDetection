@@ -2,6 +2,7 @@ package userInterface;
 
 import learning.ChromosomeOperator;
 import learning.Learner;
+import learning.TerminalOperator;
 import model.Chromosome;
 import model.Radiography;
 import repository.ChromosomeRepository;
@@ -29,7 +30,7 @@ public class Tester {
 
     public Tester() {
         files = new Files();
-        chromosomeOperator = new ChromosomeOperator();
+        chromosomeOperator = new ChromosomeOperator(new TerminalOperator());
         initializeExtractors();
     }
 
