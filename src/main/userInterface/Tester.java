@@ -171,17 +171,11 @@ public class Tester {
 				} else {
 					wrongNormal++;
 				}
-				// System.out.println(r.getName());
 			}
 		}
 
 		WrongEntry wrongs = new WrongEntry(wrongCancer, wrongNormal);
 
-		if (updateTotals) {
-			System.out.println("Gresit: " + wrong);
-			System.out.println("Wrong cancer: " + wrongCancer);
-			System.out.println("Wrong normal: " + wrongNormal);
-		}
 		return wrongs;
 	}
 }

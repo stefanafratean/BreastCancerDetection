@@ -24,9 +24,6 @@ public class Learner {
 	public Chromosome findBestChromosome() {
 		chromosomeRepository.setPopulationFitness(radiographyRepository
 				.getTrainRadiographies());
-//		 chromosomeRepository.evaluatePopulation();
-//		System.out.println("Done initializing population.");
-		// chromosomeRepository.logPopulation();
 
 		int notChangedNumber = 0;
 		for (int g = 0; g < GENERATIONS_NUMBER; g++) {
@@ -34,23 +31,13 @@ public class Learner {
 			for (int i = 0; i < ChromosomeRepository.POPULATION_NUMBER; i++) {
 				improvePopulation();
 			}
-			if ((g + 1) % 100 == 0) {
-				System.out.println(g);
-			}
-//			 chromosomeRepository.logPopulation();
 			if (!changed) {
 				notChangedNumber++;
 			}
 			if (notChangedNumber >= 100) {
-				System.out.println("Generatii rulate: " + g);
 				break;
 			}
 		}
-		System.out.println("Fin!"
-				+ chromosomeRepository.getBestChromosome().getFitness());
-//		if (chromosomeRepository.getBestChromosome().getFitness() < 0.50d) {
-//			chromosomeRepository.logPopulation();
-//		}
 		
 //		chromosomeRepository.setPopulationFitness(radiographyRepository.getValidationRadiographies());
 		return chromosomeRepository.getBestChromosome();

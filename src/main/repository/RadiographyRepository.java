@@ -182,9 +182,6 @@ public class RadiographyRepository {
 				for (int i = 0; i < tokens.length; i++) {
 					descriptorsList[i] = Double.parseDouble(tokens[i]);
 				}
-				if (descriptorsList.length != 7781) {
-					System.out.println(descriptorsList.length);
-				}
 				try {
 					radiographyList.get(c).addDescriptors(descriptorsList);
 				} catch (Exception e) {

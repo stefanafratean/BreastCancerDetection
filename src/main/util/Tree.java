@@ -43,27 +43,27 @@ public class Tree<T> {
 
 	// TODO remove this and add toString()
 	public void getString(Node<T> currentNode) {
-		try (PrintWriter out = new PrintWriter(new BufferedWriter(
-				new FileWriter("output.txt", true)))) {
-			// rad
-			out.print(currentNode.getData() + " ");
-
-			// stg
-			if (currentNode.getLeft() != null) {
-				out.print(" l[ ");
-				getString(currentNode.getLeft());
-				out.print(" ] ");
-			}
-
-			// dr
-			if (currentNode.getRight() != null) {
-				out.print(" r[ ");
-				getString(currentNode.getRight());
-				out.print(" ] ");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try (PrintWriter out = new PrintWriter(new BufferedWriter(
+//				new FileWriter("output.txt", true)))) {
+//			// rad
+//			out.print(currentNode.getData() + " ");
+//
+//			// stg
+//			if (currentNode.getLeft() != null) {
+//				out.print(" l[ ");
+//				getString(currentNode.getLeft());
+//				out.print(" ] ");
+//			}
+//
+//			// dr
+//			if (currentNode.getRight() != null) {
+//				out.print(" r[ ");
+//				getString(currentNode.getRight());
+//				out.print(" ] ");
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 }
