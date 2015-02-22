@@ -38,10 +38,7 @@ public class TerminalOperator {
     }
 
     public boolean shouldAddTerminal(Random r, boolean isFull) {
-        if (isFull) {
-            return false;
-        }
-        return r.nextDouble() < 0.5d;
+        return !isFull && r.nextDouble() < 0.5d;
     }
 
     /**

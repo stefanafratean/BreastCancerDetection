@@ -12,11 +12,8 @@ public class FitnessHelper {
 	}
 
 	public static boolean fitnessHasBiggerValue(double fitness1, double fitness2) {
-		if (fitness1 > fitness2) {
-			return true;
-		}
-		return false;
-	}
+        return fitness1 > fitness2;
+    }
 
 	public static boolean fitnessAreEqual(double fitness1, double fitness2) {
 		return fitness1 == fitness2;

@@ -13,8 +13,8 @@ public class Radiography {
     }
 
     public void addDescriptors(double[] descriptorsList) {
-        for (int i = 0; i < descriptorsList.length; i++) {
-            features.add(descriptorsList[i]);
+        for (double aDescriptorsList : descriptorsList) {
+            features.add(aDescriptorsList);
         }
     }
 

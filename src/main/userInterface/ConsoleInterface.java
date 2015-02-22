@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ConsoleInterface {
-    LearningStarter learningStarter;
+    private LearningStarter learningStarter;
 
     public ConsoleInterface(LearningStarter learningStarter) {
         this.learningStarter = learningStarter;

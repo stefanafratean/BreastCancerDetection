@@ -3,7 +3,7 @@ package repository.extractors;
 import util.Files;
 
 public class CSSFeatureExtractor implements FeatureExtractor {
-    public final static int ELEMENTS_NUMBER = 7781;
+    private final static int ELEMENTS_NUMBER = 7781;
 
     @Override
     public int getNumberOfFeatures() {

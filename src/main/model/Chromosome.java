@@ -34,11 +34,6 @@ public class Chromosome implements Comparable<Chromosome>{
 		return "" + fitness;
 	}
 
-	// TODO remove this
-	public void getString() {
-		representation.getString(representation.getRoot());
-	}
-
 	public double getFitness() {
 		return fitness;
 	}
@@ -54,16 +49,17 @@ public class Chromosome implements Comparable<Chromosome>{
 
 	@Override
 	public int compareTo(Chromosome o) {
-		if (fitness < ((Chromosome) o).fitness){
+		if (fitness < o.fitness){
 			return 1;
 		}
-		if (fitness > ((Chromosome) o).fitness){
+		if (fitness > o.fitness){
 			return -1;
 		}
 		return 0;
 	}
 	
-	public Chromosome clone(){
+	public Chromosome clone() throws CloneNotSupportedException {
+        super.clone();
 		Chromosome c = new Chromosome(representation);
 		c.fitness = fitness;
 		return c;

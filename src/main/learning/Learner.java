@@ -6,7 +6,7 @@ import model.Chromosome;
 import repository.ChromosomeRepository;
 import repository.RadiographyRepository;
 
-public class Learner {
+class Learner {
 	private static final int GENERATIONS_NUMBER = 500;
 
 	private final Random r;
@@ -46,9 +46,6 @@ public class Learner {
 	}
 
 	private void improvePopulation() {
-		if (r.nextDouble() < 0.9d) {
-
-		}
 		Chromosome offspring = createNewChromosome();
 		chromosomeRepository.setFitnessToChromosome(offspring,
 				radiographyRepository.getTrainRadiographies());

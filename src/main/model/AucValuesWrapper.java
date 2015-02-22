@@ -7,8 +7,8 @@ import java.util.List;
 public class AucValuesWrapper {
 	private final List<Double> outputsForNormalRadios;
 	private final List<Double> outputsForCancerRadios;
-	List<Double> tpRates;
-	List<Double> fpRates;
+	private List<Double> tpRates;
+	private List<Double> fpRates;
 
 	public AucValuesWrapper() {
 		outputsForNormalRadios = new ArrayList<Double>();

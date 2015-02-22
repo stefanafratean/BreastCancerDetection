@@ -54,10 +54,14 @@ public class MultiplePopulationLearner {
 			int currentPop) {
 		ChromosomeRepository currentSubPop = subPopulations.get(currentPop);
 		int index = getChangePopulationIndex(currentPop);
-		Chromosome importedChromosome = bestOfAllPop.get(index).clone();
-		if (currentSubPop.chromosomeIsWorthy(importedChromosome)) {
+        Chromosome importedChromosome = null;
+        try {
+            importedChromosome = bestOfAllPop.get(index).clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        if (currentSubPop.chromosomeIsWorthy(importedChromosome)) {
 			currentSubPop.addChromosome(importedChromosome);
-//			System.out.println("Added " + importedChromosome.toString());
 		}
 	}
 

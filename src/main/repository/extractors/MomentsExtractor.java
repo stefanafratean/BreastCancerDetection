@@ -3,7 +3,7 @@ package repository.extractors;
 import util.Files;
 
 public class MomentsExtractor implements FeatureExtractor {
-    public final static int ELEMENTS_NUMBER = 6;
+    private final static int ELEMENTS_NUMBER = 6;
 
     @Override
     public int getNumberOfFeatures() {

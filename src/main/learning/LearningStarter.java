@@ -68,7 +68,6 @@ public class LearningStarter {
         WrongEntry wrongEntry = classifyWmw(best,
                 radiographyRepository.getTrainRadiographies(),
                 radiographyRepository.getTestRadiographies(), chromosomeOperator);
-        best.getString();
         return wrongEntry;
     }
 
@@ -85,7 +84,6 @@ public class LearningStarter {
         }
         Collections.sort(outputs);
 
-        int wrong = 0;
         int wrongCancer = 0;
         int wrongNormal = 0;
         // rad startLearning
@@ -96,7 +94,6 @@ public class LearningStarter {
                 withCancer = true;
             }
             if (withCancer != r.isWithCancer()) {
-                wrong++;
                 if (withCancer) {
                     wrongCancer++;
                 } else {

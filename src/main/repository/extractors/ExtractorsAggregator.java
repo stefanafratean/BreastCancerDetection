@@ -64,30 +64,6 @@ public class ExtractorsAggregator {
         gaborExtractor = builder.gaborExtractor;
     }
 
-    public HOGFeatureExtractor getHogFeatureExtractor() {
-        return hogFeatureExtractor;
-    }
-
-    public GLRLFeatureExtractor getGlrlFeatureExtractor() {
-        return glrlFeatureExtractor;
-    }
-
-    public MomentsExtractor getMomentsExtractor() {
-        return momentsExtractor;
-    }
-
-    public HaralickFeatureExtractor getHaralickExtractor() {
-        return haralickExtractor;
-    }
-
-    public GaborFeatureExtractor getGaborExtractor() {
-        return gaborExtractor;
-    }
-
-    public CSSFeatureExtractor getCssExtractor() {
-        return cssExtractor;
-    }
-
     public List<FeatureExtractor> getAllExtractors() {
         return Arrays.asList(cssExtractor, gaborExtractor, glrlFeatureExtractor, haralickExtractor, hogFeatureExtractor, momentsExtractor);
     }

@@ -3,7 +3,7 @@ package repository.extractors;
 import util.Files;
 
 public class HaralickFeatureExtractor implements FeatureExtractor {
-    public final static int ELEMENTS_NUMBER = 14;
+    private final static int ELEMENTS_NUMBER = 14;
 
     @Override
     public int getNumberOfFeatures() {

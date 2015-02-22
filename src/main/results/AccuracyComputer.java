@@ -1,6 +1,6 @@
 package results;
 
-public class AccuracyComputer {
+class AccuracyComputer {
 	private int totalNo;
 
 	public AccuracyComputer(int totalNo) {
