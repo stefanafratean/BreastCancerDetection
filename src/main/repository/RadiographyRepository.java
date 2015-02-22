@@ -16,8 +16,6 @@ public class RadiographyRepository {
     public RadiographyRepository(ExtractorsAggregator extractors, String fileName) {
         this.radLoader = new RadiographyLoader();
         List<Radiography> radiographyList = radLoader.loadRadiographies(extractors, fileName);
-//        RadiographyValuesNormalizer normalizer = new MinMaxNormalizer();
-//        normalizer.normalize(radiographyList);
 
         subsetsList = initializeSubsetsList(radiographyList);
     }
