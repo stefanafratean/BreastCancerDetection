@@ -1,13 +1,10 @@
-package userInterface;
+package learning;
 
-import learning.ChromosomeOperator;
-import learning.Learner;
-import learning.TerminalOperator;
 import model.Chromosome;
 import model.Radiography;
 import repository.ChromosomeRepository;
 import repository.RadiographyRepository;
-import repository.extractors.*;
+import repository.extractors.ExtractorsAggregator;
 import results.ResultsProcessor;
 import results.WrongEntry;
 import util.Files;
@@ -17,35 +14,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Tester {
-    // private final List<Radiography> testRadiographies;
-    private HOGFeatureExtractor hogFeatureExtractor;
-    private GLRLFeatureExtractor glrlFeatureExtractor;
-    private MomentsExtractor momentsExtractor;
-    private HaralickFeatureExtractor haralickExtractor;
-    private GaborFeatureExtractor gaborExtractor;
-    private CSSFeatureExtractor cssExtractor;
+public class LearningStarter {
     private Files files;
-    private ChromosomeOperator chromosomeOperator;
-    private ExtractorsAggregator extractors;
 
-    public Tester() {
+    public LearningStarter() {
         files = new Files();
-        initializeExtractors();
-        extractors = new ExtractorsAggregator.Builder().moments(momentsExtractor).build();
-        chromosomeOperator = new ChromosomeOperator(new TerminalOperator(extractors));
     }
 
-    private void initializeExtractors() {
-//		 hogFeatureExtractor = new HOGFeatureExtractor();
-//		 glrlFeatureExtractor = new GLRLFeatureExtractor();
-        momentsExtractor = new MomentsExtractor();
-//		haralickExtractor = new HaralickFeatureExtractor();
-        // gaborExtractor = new GaborFeatureExtractor();
-        // cssExtractor = new CSSFeatureExtractor();
-    }
-
-    public void test() {
+    public void startLearning(ExtractorsAggregator extractors) {
+        ChromosomeOperator chromosomeOperator = new ChromosomeOperator(new TerminalOperator(extractors));
         RadiographyRepository radiographyRepository = new RadiographyRepository(extractors, files.getFile());
         Random r = new Random();
         int radiographyNb = radiographyRepository.getRadiographyNb();
@@ -56,7 +33,7 @@ public class Tester {
 
         for (int i = 0; i < iter; i++) {
             WrongEntry wrongsPerCross = performCrossExperiment(
-                    radiographyRepository, r);
+                    radiographyRepository, chromosomeOperator, r);
             resProcessor.computeAndShowResults(wrongsPerCross);
         }
 
@@ -64,11 +41,11 @@ public class Tester {
     }
 
     private WrongEntry performCrossExperiment(
-            RadiographyRepository radiographyRepository, Random r) {
+            RadiographyRepository radiographyRepository, ChromosomeOperator chromosomeOperator, Random r) {
         WrongEntry wrongsPerCross = new WrongEntry(0, 0);
         for (int j = 0; j < 10; j++) {
             WrongEntry wrongPerSubFold = performSubFold(radiographyRepository,
-                    r);
+                    chromosomeOperator, r);
             wrongsPerCross.add(wrongPerSubFold);
             radiographyRepository.increaseCurrentSubset();
         }
@@ -80,7 +57,7 @@ public class Tester {
     }
 
     private WrongEntry performSubFold(
-            RadiographyRepository radiographyRepository, Random r) {
+            RadiographyRepository radiographyRepository, ChromosomeOperator chromosomeOperator, Random r) {
         ChromosomeRepository chromosomeRepository = new ChromosomeRepository(r, chromosomeOperator);
         Learner learner = new Learner(chromosomeRepository,
                 radiographyRepository, chromosomeOperator, r);
@@ -90,14 +67,14 @@ public class Tester {
 
         WrongEntry wrongEntry = classifyWmw(best,
                 radiographyRepository.getTrainRadiographies(),
-                radiographyRepository.getTestRadiographies(), true);
+                radiographyRepository.getTestRadiographies(), chromosomeOperator);
         best.getString();
         return wrongEntry;
     }
 
     private WrongEntry classifyWmw(Chromosome best,
                                    List<Radiography> trainRadiographies,
-                                   List<Radiography> testRadiographies, boolean updateTotals) {
+                                   List<Radiography> testRadiographies, ChromosomeOperator chromosomeOperator) {
         int negativeClassSize = 0;
         List<Double> outputs = new ArrayList<Double>();
         for (Radiography rad : trainRadiographies) {
@@ -111,7 +88,7 @@ public class Tester {
         int wrong = 0;
         int wrongCancer = 0;
         int wrongNormal = 0;
-        // rad test
+        // rad startLearning
         for (Radiography r : testRadiographies) {
             double output = chromosomeOperator.getOutputValue(best, r);
             boolean withCancer = false;
