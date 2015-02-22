@@ -1,6 +1,8 @@
 package learning;
 
 import model.Radiography;
+import repository.extractors.ExtractorsAggregator;
+import repository.extractors.FeatureExtractor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,15 +13,21 @@ public class TerminalOperator {
             8, 9, -1, -2, -3, -4, -5, -6, -7, -8, -9);
     private int numberOfTerminals;
 
-    public TerminalOperator() {
-        numberOfTerminals = 0
-                // constants.size()
-//	 + HOGFeature.ELEMENTS_NUMBER;
-//	 + GLRLFeature.ELEMENTS_NUMBER
-                + 6; // momente
-//	 + 14; // haralick
-//	+ 60; // gabor
-        // + 7781; //css
+    public TerminalOperator(ExtractorsAggregator extractors) {
+        computeNumberOfTerminals(extractors);
+    }
+
+    private void computeNumberOfTerminals(ExtractorsAggregator extractors) {
+        numberOfTerminals = 0;
+        for (FeatureExtractor extractor : extractors.getAllExtractors()) {
+            addExtractorNumberOfFeatures(extractor);
+        }
+    }
+
+    private void addExtractorNumberOfFeatures(FeatureExtractor extractor) {
+        if (extractor != null) {
+            numberOfTerminals += extractor.getNumberOfFeatures();
+        }
     }
 
     /*

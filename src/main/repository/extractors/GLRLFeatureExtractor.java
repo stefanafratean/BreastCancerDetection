@@ -1,16 +1,17 @@
 package repository.extractors;
 
-public class GLRLFeatureExtractor implements FeatureExtractor {
-//	static {
-//		System.loadLibrary("libGLRLExtractor");
-//	}
-//
-//	public native double[] extractGLRL(String imageLocation);
+import util.Files;
 
-	@Override
-	public double[] extractDescriptors(String imageLocation) {
- 
-//		 return extractGLRL(imageLocation);
-		return new double[0];
-	}
+public class GLRLFeatureExtractor implements FeatureExtractor {
+    public final static int ELEMENTS_NUMBER = 11;
+
+    @Override
+    public int getNumberOfFeatures() {
+        return ELEMENTS_NUMBER;
+    }
+
+    @Override
+    public String getFileToExtractFrom() {
+        return new Files().getGLRLFile();
+    }
 }

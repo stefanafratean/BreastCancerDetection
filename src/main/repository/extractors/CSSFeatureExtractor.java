@@ -1,22 +1,17 @@
 package repository.extractors;
 
+import util.Files;
+
 public class CSSFeatureExtractor implements FeatureExtractor {
-//	private static int i = 1;
-//	static {
-//		System.loadLibrary("libCSSExtractor");
-//
-//	}
+    public final static int ELEMENTS_NUMBER = 7781;
 
-//	public native double[] extractCSS(String imageLocation);
+    @Override
+    public int getNumberOfFeatures() {
+        return ELEMENTS_NUMBER;
+    }
 
-	@Override
-	public double[] extractDescriptors(String imageLocation) {
-//		try {
-//			System.out.println(i++);
-//			return extractCSS(imageLocation);
-//		} catch (Exception e) {
-//			System.out.println(imageLocation);
-//		}
-		return new double[0];
-	}
+    @Override
+    public String getFileToExtractFrom() {
+        return new Files().getCSSFile();
+    }
 }

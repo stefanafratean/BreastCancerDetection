@@ -1,16 +1,18 @@
 package repository.extractors;
 
-public class MomentsExtractor implements FeatureExtractor{
-//	static {
-//		System.loadLibrary("libMomentsExtractor");
-//	}
-//
-//	public native double[] extractMoments(String imageLocation);
+import util.Files;
 
-	@Override
-	public double[] extractDescriptors(String imageLocation) {
-//		return extractMoments(imageLocation);
-		return new double[6];
-	}
+public class MomentsExtractor implements FeatureExtractor {
+    public final static int ELEMENTS_NUMBER = 6;
+
+    @Override
+    public int getNumberOfFeatures() {
+        return ELEMENTS_NUMBER;
+    }
+
+    @Override
+    public String getFileToExtractFrom() {
+        return new Files().getMomentsFile();
+    }
 
 }

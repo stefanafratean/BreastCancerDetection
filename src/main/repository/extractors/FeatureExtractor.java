@@ -1,5 +1,6 @@
 package repository.extractors;
 
 public interface FeatureExtractor {
-	double[] extractDescriptors(String imageLocation);
+    int getNumberOfFeatures();
+    String getFileToExtractFrom();
 }

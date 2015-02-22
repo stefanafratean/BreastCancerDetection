@@ -6,7 +6,6 @@ import learning.TerminalOperator;
 import model.Chromosome;
 import model.Radiography;
 import repository.ChromosomeRepository;
-import repository.extractors.ExtractorsAggregator;
 import repository.RadiographyRepository;
 import repository.extractors.*;
 import results.ResultsProcessor;
@@ -28,11 +27,13 @@ public class Tester {
     private CSSFeatureExtractor cssExtractor;
     private Files files;
     private ChromosomeOperator chromosomeOperator;
+    private ExtractorsAggregator extractors;
 
     public Tester() {
         files = new Files();
-        chromosomeOperator = new ChromosomeOperator(new TerminalOperator());
         initializeExtractors();
+        extractors = new ExtractorsAggregator.Builder().moments(momentsExtractor).build();
+        chromosomeOperator = new ChromosomeOperator(new TerminalOperator(extractors));
     }
 
     private void initializeExtractors() {
@@ -45,8 +46,7 @@ public class Tester {
     }
 
     public void test() {
-        RadiographyRepository radiographyRepository = new RadiographyRepository(
-                new ExtractorsAggregator(hogFeatureExtractor, glrlFeatureExtractor, momentsExtractor, haralickExtractor, gaborExtractor, cssExtractor), files.getFile());
+        RadiographyRepository radiographyRepository = new RadiographyRepository(extractors, files.getFile());
         Random r = new Random();
         int radiographyNb = radiographyRepository.getRadiographyNb();
         int cancerNb = radiographyRepository.getCancerRadNb();
