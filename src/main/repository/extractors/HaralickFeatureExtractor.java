@@ -1,9 +1,14 @@
 package repository.extractors;
 
-import util.Files;
+import util.File;
 
 public class HaralickFeatureExtractor implements FeatureExtractor {
     private final static int ELEMENTS_NUMBER = 14;
+    private File file;
+
+    public HaralickFeatureExtractor(File file) {
+        this.file = file;
+    }
 
     @Override
     public int getNumberOfFeatures() {
@@ -12,6 +17,6 @@ public class HaralickFeatureExtractor implements FeatureExtractor {
 
     @Override
     public String getFileToExtractFrom() {
-        return new Files().getHaralickFile();
+        return file.getHaralickFile();
     }
 }

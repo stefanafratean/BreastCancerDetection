@@ -4,10 +4,8 @@ import model.Chromosome;
 import model.Radiography;
 import repository.ChromosomeRepository;
 import repository.RadiographyRepository;
-import repository.extractors.ExtractorsAggregator;
 import results.ResultsProcessor;
 import results.WrongEntry;
-import util.Files;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,37 +13,34 @@ import java.util.List;
 import java.util.Random;
 
 public class LearningStarter {
-    private Files files;
+    private RadiographyRepository radiographyRepository;
+    private ChromosomeOperator chromosomeOperator;
 
-    public LearningStarter() {
-        files = new Files();
+    public LearningStarter(RadiographyRepository radiographyRepository, ChromosomeOperator chromosomeOperator) {
+        this.radiographyRepository = radiographyRepository;
+        this.chromosomeOperator = chromosomeOperator;
     }
 
-    public void startLearning(ExtractorsAggregator extractors) {
-        ChromosomeOperator chromosomeOperator = new ChromosomeOperator(new TerminalOperator(extractors));
-        RadiographyRepository radiographyRepository = new RadiographyRepository(extractors, files.getFile());
+    public void startLearning() {
         Random r = new Random();
         int radiographyNb = radiographyRepository.getRadiographyNb();
         int cancerNb = radiographyRepository.getCancerRadNb();
-        int iter = 100;
+        int iterations = 100;
         ResultsProcessor resProcessor = new ResultsProcessor(radiographyNb,
-                cancerNb, iter);
+                cancerNb, iterations);
 
-        for (int i = 0; i < iter; i++) {
-            WrongEntry wrongsPerCross = performCrossExperiment(
-                    radiographyRepository, chromosomeOperator, r);
+        for (int i = 0; i < iterations; i++) {
+            WrongEntry wrongsPerCross = performCrossExperiment(r);
             resProcessor.computeAndShowResults(wrongsPerCross);
         }
 
         resProcessor.computeAndShowGlobals();
     }
 
-    private WrongEntry performCrossExperiment(
-            RadiographyRepository radiographyRepository, ChromosomeOperator chromosomeOperator, Random r) {
+    private WrongEntry performCrossExperiment(Random r) {
         WrongEntry wrongsPerCross = new WrongEntry(0, 0);
         for (int j = 0; j < 10; j++) {
-            WrongEntry wrongPerSubFold = performSubFold(radiographyRepository,
-                    chromosomeOperator, r);
+            WrongEntry wrongPerSubFold = performSubFold(r);
             wrongsPerCross.add(wrongPerSubFold);
             radiographyRepository.increaseCurrentSubset();
         }
@@ -56,8 +51,7 @@ public class LearningStarter {
         return wrongsPerCross;
     }
 
-    private WrongEntry performSubFold(
-            RadiographyRepository radiographyRepository, ChromosomeOperator chromosomeOperator, Random r) {
+    private WrongEntry performSubFold(Random r) {
         ChromosomeRepository chromosomeRepository = new ChromosomeRepository(r, chromosomeOperator);
         Learner learner = new Learner(chromosomeRepository,
                 radiographyRepository, chromosomeOperator, r);
@@ -65,18 +59,14 @@ public class LearningStarter {
         // CV evaluation part 2
         Chromosome best = learner.findBestChromosome();
 
-        WrongEntry wrongEntry = classifyWmw(best,
-                radiographyRepository.getTrainRadiographies(),
-                radiographyRepository.getTestRadiographies(), chromosomeOperator);
+        WrongEntry wrongEntry = classifyWmw(best);
         return wrongEntry;
     }
 
-    private WrongEntry classifyWmw(Chromosome best,
-                                   List<Radiography> trainRadiographies,
-                                   List<Radiography> testRadiographies, ChromosomeOperator chromosomeOperator) {
+    private WrongEntry classifyWmw(Chromosome best) {
         int negativeClassSize = 0;
         List<Double> outputs = new ArrayList<Double>();
-        for (Radiography rad : trainRadiographies) {
+        for (Radiography rad : radiographyRepository.getTrainRadiographies()) {
             if (!rad.isWithCancer()) {
                 negativeClassSize++;
             }
@@ -87,7 +77,7 @@ public class LearningStarter {
         int wrongCancer = 0;
         int wrongNormal = 0;
         // rad startLearning
-        for (Radiography r : testRadiographies) {
+        for (Radiography r : radiographyRepository.getTestRadiographies()) {
             double output = chromosomeOperator.getOutputValue(best, r);
             boolean withCancer = false;
             if (output > outputs.get(negativeClassSize)) {

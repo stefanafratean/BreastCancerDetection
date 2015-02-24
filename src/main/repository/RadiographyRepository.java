@@ -2,6 +2,7 @@ package repository;
 
 import model.Radiography;
 import repository.extractors.ExtractorsAggregator;
+import util.File;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,9 @@ public class RadiographyRepository {
     private static int currentSubset;
     private RadiographyLoader radLoader;
 
-    public RadiographyRepository(ExtractorsAggregator extractors, String fileName) {
+    public RadiographyRepository(ExtractorsAggregator extractors, File file) {
         this.radLoader = new RadiographyLoader();
-        List<Radiography> radiographyList = radLoader.loadRadiographies(extractors, fileName);
+        List<Radiography> radiographyList = radLoader.loadRadiographies(extractors, file.getFile());
 
         subsetsList = initializeSubsetsList(radiographyList);
     }

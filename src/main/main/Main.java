@@ -5,8 +5,7 @@ import userInterface.ConsoleInterface;
 
 public class Main {
     public static void main(String[] args) {
-        LearningStarter learningStarter = new LearningStarter();
-        ConsoleInterface consoleUI = new ConsoleInterface(learningStarter);
+        ConsoleInterface consoleUI = new ConsoleInterface();
         consoleUI.run();
     }
 }

@@ -1,9 +1,14 @@
 package repository.extractors;
 
-import util.Files;
+import util.File;
 
 public class MomentsExtractor implements FeatureExtractor {
     private final static int ELEMENTS_NUMBER = 6;
+    private File file;
+
+    public MomentsExtractor(File file){
+        this.file = file;
+    }
 
     @Override
     public int getNumberOfFeatures() {
@@ -12,7 +17,7 @@ public class MomentsExtractor implements FeatureExtractor {
 
     @Override
     public String getFileToExtractFrom() {
-        return new Files().getMomentsFile();
+        return file.getMomentsFile();
     }
 
 }

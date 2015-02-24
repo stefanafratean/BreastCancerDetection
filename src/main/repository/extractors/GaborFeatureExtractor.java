@@ -1,9 +1,14 @@
 package repository.extractors;
 
-import util.Files;
+import util.File;
 
 public class GaborFeatureExtractor implements FeatureExtractor {
     private final static int ELEMENTS_NUMBER = 60;
+    private File file;
+
+    public GaborFeatureExtractor(File file) {
+        this.file = file;
+    }
 
     @Override
     public int getNumberOfFeatures() {
@@ -12,7 +17,7 @@ public class GaborFeatureExtractor implements FeatureExtractor {
 
     @Override
     public String getFileToExtractFrom() {
-        return new Files().getGaborFile();
+        return file.getGaborFile();
     }
 
 }

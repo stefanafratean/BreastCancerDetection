@@ -1,9 +1,14 @@
 package repository.extractors;
 
-import util.Files;
+import util.File;
 
 public class CSSFeatureExtractor implements FeatureExtractor {
     private final static int ELEMENTS_NUMBER = 7781;
+    private File file;
+
+    public CSSFeatureExtractor(File file) {
+        this.file = file;
+    }
 
     @Override
     public int getNumberOfFeatures() {
@@ -12,6 +17,6 @@ public class CSSFeatureExtractor implements FeatureExtractor {
 
     @Override
     public String getFileToExtractFrom() {
-        return new Files().getCSSFile();
+        return file.getCSSFile();
     }
 }
