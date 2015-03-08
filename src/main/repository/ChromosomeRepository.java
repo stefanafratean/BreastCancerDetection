@@ -5,11 +5,9 @@ import fitness.WmwFitnessCalculator;
 import learning.ChromosomeOperator;
 import model.Chromosome;
 import model.Radiography;
+import model.objective.Objective;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ChromosomeRepository {
     public static final int POPULATION_NUMBER = 100;
@@ -47,8 +45,7 @@ public class ChromosomeRepository {
         Chromosome bestChoice = population.get(r.nextInt(POPULATION_NUMBER));
         for (int i = 0; i < tournamentSize - 1; i++) {
             Chromosome newChoice = population.get(r.nextInt(POPULATION_NUMBER));
-            if (fitnessCalculator.isBetterFitness(newChoice.getFitness(),
-                    bestChoice.getFitness())) {
+            if (newChoice.getFitness() < bestChoice.getFitness()) {
                 bestChoice = newChoice;
             }
         }
@@ -64,12 +61,10 @@ public class ChromosomeRepository {
     }
 
     /**
-     * Adds offspring to the population and it removes the worst chromosome. The
-     * worst chromosome from the population is considered the one that has the
-     * biggest fitness
+     * Adds offspring to the population.
      */
     public void addChromosome(Chromosome offspring) {
-        population.remove(population.size() - 1);
+//        population.remove(population.size() - 1);
         int index = Collections.binarySearch(population, offspring);
         if (index < 0) {
             index = ~index;
@@ -99,24 +94,83 @@ public class ChromosomeRepository {
      * Sets the fitness for each of the chromosomes in the population.
      *
      * @param radiographies The list of radiographies.
+     * @param objectives
      */
-    public void setPopulationFitness(List<Radiography> radiographies) {
+    public void setPopulationFitness(List<Radiography> radiographies, List<Objective> objectives) {
         for (Chromosome c : population) {
-            setFitnessToChromosome(c, radiographies);
+            setPerformanceMeasureToChromosome(c, radiographies);
         }
-        Collections.sort(population);
+//        Collections.sort(population);
+        evaluatePopulation(objectives);
     }
 
     /**
-     * Sets the fitness of the given choromosome, based on based on his
+     * Sets the fitness of the given chromosome, based on based on his
      * performance on the radiographies list
      *
      * @param chromosome    The chromosome to which the fitness wil be set.
      * @param radiographies The list of radiographies.
      */
-    public void setFitnessToChromosome(Chromosome chromosome,
-                                       List<Radiography> radiographies) {
-        chromosome.setFitness(fitnessCalculator.computeFitness(chromosome,
+    public void setPerformanceMeasureToChromosome(Chromosome chromosome,
+                                                  List<Radiography> radiographies) {
+        chromosome.setWmw(fitnessCalculator.computeFitness(chromosome,
                 radiographies));
+    }
+
+    public void evaluatePopulation(List<Objective> objectives) {
+        for (Chromosome chromosome : population) {
+            chromosome.setFitness(computeRank(chromosome, objectives));
+        }
+    }
+
+    private double computeRank(Chromosome chromosome, List<Objective> objectives) {
+        int rank = 0;
+        for (Chromosome otherChromosome : population) {
+            // don't check for the same instance (but check for other instances with equal value)
+            if (chromosome != otherChromosome) {
+                if (dominates(otherChromosome, chromosome, objectives)) {
+                    rank++;
+                }
+            }
+        }
+        return rank;
+    }
+
+    /*
+     * Checks if chromosome1 dominates chromosome2. A chromosome c1 dominates a chromosome c2 if it as
+     * least as good as c2 on all of the objectives and better on at least one
+     */
+    private boolean dominates(Chromosome chromosome1, Chromosome chromosome2, List<Objective> objectives) {
+        boolean allAsGood = true;
+        boolean oneBetter = false;
+        for (Objective objective : objectives) {
+            if (objective.compare(chromosome1, chromosome2) > 0) {
+                oneBetter = true;
+            } else if (!(objective.compare(chromosome1, chromosome2) == 0)) {
+                allAsGood = false;
+            }
+        }
+        return allAsGood && oneBetter;
+    }
+
+    public void removeUnworthyDescendants() {
+        Collections.sort(population);
+        while (population.size() > POPULATION_NUMBER) {
+            population.remove(population.size() - 1);
+        }
+    }
+
+    public List<Chromosome> getChromosomeList() {
+        return population;
+    }
+
+    public void removeChromosomesThatAreWorseThanRandom() {
+        Iterator<Chromosome> it = population.iterator();
+        while (it.hasNext()) {
+            Chromosome chromosome = it.next();
+            if (chromosome.getWmw() < 0.5d) {
+                it.remove();
+            }
+        }
     }
 }

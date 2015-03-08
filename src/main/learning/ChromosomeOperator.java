@@ -8,6 +8,8 @@ import model.functions.TwoArgumentsFunction;
 import util.Node;
 import util.Tree;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 import static model.functions.FunctionHelper.generateFunction;
@@ -55,7 +57,7 @@ public class ChromosomeOperator {
      */
     public Chromosome createChromosome(int maxDepth, Random r,
                                        boolean isFull) {
-        Chromosome chromosome = new Chromosome(maxDepth, r);
+        Chromosome chromosome = new Chromosome(r);
         initChromosome(maxDepth, 0, r, chromosome.getRootNode(), isFull);
         return chromosome;
     }
@@ -223,15 +225,12 @@ public class ChromosomeOperator {
                     cont = true;
                 }
             } else {
-                parent.setDepth(depth);
                 return parent;
             }
             if (!cont) {
                 if (parent.getParent() != null) {
-                    parent.setDepth(depth - 1);
                     return parent.getParent();
                 }
-                parent.setDepth(depth);
                 return parent;
             }
             depth++;

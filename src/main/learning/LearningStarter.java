@@ -57,30 +57,48 @@ public class LearningStarter {
                 radiographyRepository, chromosomeOperator, r);
 
         // CV evaluation part 2
-        Chromosome best = learner.findBestChromosome();
+        List<Chromosome> paretoFront = learner.findParetoFront();
 
-        WrongEntry wrongEntry = classifyWmw(best);
+        WrongEntry wrongEntry = classifyWmw(paretoFront);
         return wrongEntry;
     }
 
-    private WrongEntry classifyWmw(Chromosome best) {
-        int negativeClassSize = 0;
-        List<Double> outputs = new ArrayList<Double>();
-        for (Radiography rad : radiographyRepository.getTrainRadiographies()) {
-            if (!rad.isWithCancer()) {
-                negativeClassSize++;
-            }
-            outputs.add(chromosomeOperator.getOutputValue(best, rad));
+    private WrongEntry classifyWmw(List<Chromosome> paretoFrontChromosomes) {
+        List<Integer> negativeClassSizes = new ArrayList<Integer>();
+        for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
+            negativeClassSizes.add(0);
         }
-        Collections.sort(outputs);
+        ArrayList<ArrayList<Double>> outputs = new ArrayList<ArrayList<Double>>();
+        for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
+            ArrayList<Double> outputForCurrentChr = new ArrayList<Double>();
+            for (Radiography rad : radiographyRepository.getTrainRadiographies()) {
+                if (!rad.isWithCancer()) {
+                    negativeClassSizes.set(i, negativeClassSizes.get(i) + 1);
+                }
+                outputForCurrentChr.add(chromosomeOperator.getOutputValue(paretoFrontChromosomes.get(i), rad));
+            }
+            Collections.sort(outputForCurrentChr);
+            outputs.add(outputForCurrentChr);
+        }
 
         int wrongCancer = 0;
         int wrongNormal = 0;
         // rad startLearning
         for (Radiography r : radiographyRepository.getTestRadiographies()) {
-            double output = chromosomeOperator.getOutputValue(best, r);
             boolean withCancer = false;
-            if (output > outputs.get(negativeClassSize)) {
+            int cancerCount = 0;
+            int normalCount = 0;
+            for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
+                double outputForCurrentChr = chromosomeOperator.getOutputValue(paretoFrontChromosomes.get(i), r);
+                ArrayList<Double> outputsForCurrentChr = outputs.get(i);
+                Integer negativeClassSizeForCurrentChr = negativeClassSizes.get(i);
+                if (outputForCurrentChr > outputsForCurrentChr.get(negativeClassSizeForCurrentChr)) {
+                    cancerCount++;
+                } else {
+                    normalCount++;
+                }
+            }
+            if (cancerCount > normalCount) {
                 withCancer = true;
             }
             if (withCancer != r.isWithCancer()) {
