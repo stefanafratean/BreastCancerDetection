@@ -1,5 +1,8 @@
 package learning;
 
+import fitness.AccPerformanceCalculator;
+import fitness.PerformanceCalculator;
+import fitness.WmwPerformanceCalculator;
 import model.Chromosome;
 import model.Radiography;
 import repository.ChromosomeRepository;
@@ -7,10 +10,7 @@ import repository.RadiographyRepository;
 import results.ResultsProcessor;
 import results.WrongEntry;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class LearningStarter {
     private RadiographyRepository radiographyRepository;
@@ -52,8 +52,11 @@ public class LearningStarter {
     }
 
     private WrongEntry performSubFold(Random r) {
-        ChromosomeRepository chromosomeRepository = new ChromosomeRepository(r, chromosomeOperator);
-        Learner learner = new Learner(chromosomeRepository,
+        PerformanceCalculator wmwPerformanceCalculator = new WmwPerformanceCalculator(chromosomeOperator);
+        PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(chromosomeOperator);
+        List<PerformanceCalculator> calculators = Arrays.asList(wmwPerformanceCalculator, accPerformanceCalculator);
+        ChromosomeRepository chromosomeRepository = new ChromosomeRepository(calculators, r, chromosomeOperator);
+        Learner learner = new Learner(calculators, chromosomeRepository,
                 radiographyRepository, chromosomeOperator, r);
 
         // CV evaluation part 2
@@ -63,6 +66,7 @@ public class LearningStarter {
         return wrongEntry;
     }
 
+    //TODO take into account all performance measures for the classification
     private WrongEntry classifyWmw(List<Chromosome> paretoFrontChromosomes) {
         List<Integer> negativeClassSizes = new ArrayList<Integer>();
         for (int i = 0; i < paretoFrontChromosomes.size(); i++) {

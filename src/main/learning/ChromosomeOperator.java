@@ -1,15 +1,17 @@
 package learning;
 
+import fitness.PerformanceCalculator;
 import model.Chromosome;
 import model.Radiography;
 import model.functions.Function;
 import model.functions.FunctionHelper;
 import model.functions.TwoArgumentsFunction;
+import model.performancemeasure.PerformanceMeasure;
 import util.Node;
 import util.Tree;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static model.functions.FunctionHelper.generateFunction;
@@ -25,12 +27,21 @@ public class ChromosomeOperator {
                 .log(terminalOperator.getNumberOfTerminals()) / Math.log(2)));
     }
 
-    public Chromosome xo(Chromosome mother, Chromosome father, Random r) {
+    public Chromosome xo(List<PerformanceCalculator> calculators, Chromosome mother, Chromosome father, Random r) {
 
         Node<Integer> node = setFlagAndBuildChild(mother, father, r);
         Tree<Integer> tree = new Tree<Integer>(node);
 
-        return new Chromosome(tree);
+        return new Chromosome(tree, getNewPerformanceMeasures(calculators));
+    }
+
+    private List<PerformanceMeasure> getNewPerformanceMeasures(List<PerformanceCalculator> calculators) {
+        List<PerformanceMeasure> performanceMeasures = new ArrayList<PerformanceMeasure>();
+        for (PerformanceCalculator calculator : calculators) {
+            PerformanceMeasure measure = new PerformanceMeasure(calculator, 0);
+            performanceMeasures.add(measure);
+        }
+        return performanceMeasures;
     }
 
     public Chromosome mutation(Chromosome chromosome, Random r) {
@@ -55,9 +66,9 @@ public class ChromosomeOperator {
      *                 initialized with the grow method.
      * @return
      */
-    public Chromosome createChromosome(int maxDepth, Random r,
+    public Chromosome createChromosome(List<PerformanceCalculator> calculators, int maxDepth, Random r,
                                        boolean isFull) {
-        Chromosome chromosome = new Chromosome(r);
+        Chromosome chromosome = new Chromosome(r, getNewPerformanceMeasures(calculators));
         initChromosome(maxDepth, 0, r, chromosome.getRootNode(), isFull);
         return chromosome;
     }

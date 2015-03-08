@@ -1,11 +1,10 @@
 package model;
 
+import model.performancemeasure.PerformanceMeasure;
 import util.Node;
 import util.Tree;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 import static model.functions.FunctionHelper.generateFunction;
 
@@ -17,15 +16,21 @@ import static model.functions.FunctionHelper.generateFunction;
 public class Chromosome implements Comparable<Chromosome> {
     private final Tree<Integer> representation;
     private double fitness;
-    private double wmw;
+    private List<PerformanceMeasure> performanceMeasures;
 
-    public Chromosome(Random r) {
+    public Chromosome(Random r, List<PerformanceMeasure> measures) {
+        this.performanceMeasures = measures;
         int f = generateFunction(r);
         representation = new Tree<Integer>(f);
     }
 
-    public Chromosome(Tree<Integer> tree) {
+    public Chromosome(Tree<Integer> tree, List<PerformanceMeasure> measures) {
         representation = tree;
+        this.performanceMeasures = measures;
+    }
+
+    private Chromosome(Tree<Integer> tree) {
+        this.representation = tree;
     }
 
     public Node<Integer> getRootNode() {
@@ -65,7 +70,7 @@ public class Chromosome implements Comparable<Chromosome> {
         super.clone();
         Chromosome c = new Chromosome(representation);
         c.fitness = fitness;
-        c.wmw = wmw;
+        c.performanceMeasures = new ArrayList<PerformanceMeasure>();
         return c;
     }
 
@@ -83,12 +88,7 @@ public class Chromosome implements Comparable<Chromosome> {
         return Collections.max(Arrays.asList(leftDepth, rightDepth));
     }
 
-    public double getWmw() {
-        return wmw;
+    public List<PerformanceMeasure> getPerformanceMeasures() {
+        return performanceMeasures;
     }
-
-    public void setWmw(double wmw) {
-        this.wmw = wmw;
-    }
-
 }

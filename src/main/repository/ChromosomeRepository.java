@@ -1,11 +1,11 @@
 package repository;
 
-import fitness.FitnessCalculator;
-import fitness.WmwFitnessCalculator;
+import fitness.PerformanceCalculator;
 import learning.ChromosomeOperator;
 import model.Chromosome;
 import model.Radiography;
 import model.objective.Objective;
+import model.performancemeasure.PerformanceMeasure;
 
 import java.util.*;
 
@@ -15,11 +15,11 @@ public class ChromosomeRepository {
     private static final int TOURNAMENT_NUMBER = 20;
     private final List<Chromosome> population;
     private final Random r;
-    private final FitnessCalculator fitnessCalculator;
+    private final List<PerformanceCalculator> calculators;
 
-    public ChromosomeRepository(Random r, ChromosomeOperator chromosomeOperator) {
+    public ChromosomeRepository(List<PerformanceCalculator> calculators, Random r, ChromosomeOperator chromosomeOperator) {
         this.r = r;
-        fitnessCalculator = new WmwFitnessCalculator(chromosomeOperator);
+        this.calculators = calculators;
         population = new ArrayList<Chromosome>();
         initPopulation(chromosomeOperator);
     }
@@ -27,9 +27,9 @@ public class ChromosomeRepository {
     // initialize population with the method ramped half-half
     private void initPopulation(ChromosomeOperator chromosomeOperator) {
         for (int i = 0; i < POPULATION_NUMBER / 2; i++) {
-            population.add(chromosomeOperator.createChromosome(
+            population.add(chromosomeOperator.createChromosome(calculators,
                     chromosomeOperator.MAX_CHROMOSOME_DEPTH, r, false));
-            population.add(chromosomeOperator.createChromosome(
+            population.add(chromosomeOperator.createChromosome(calculators,
                     chromosomeOperator.MAX_CHROMOSOME_DEPTH, r, true));
         }
     }
@@ -42,14 +42,72 @@ public class ChromosomeRepository {
     }
 
     private Chromosome tournamentSelect(int tournamentSize) {
-        Chromosome bestChoice = population.get(r.nextInt(POPULATION_NUMBER));
+        int bestChoiceIndex = r.nextInt(POPULATION_NUMBER);
+        Chromosome bestChoice = population.get(bestChoiceIndex);
         for (int i = 0; i < tournamentSize - 1; i++) {
-            Chromosome newChoice = population.get(r.nextInt(POPULATION_NUMBER));
+            int newChoiceIndex = r.nextInt(POPULATION_NUMBER);
+            Chromosome newChoice = population.get(newChoiceIndex);
             if (newChoice.getFitness() < bestChoice.getFitness()) {
                 bestChoice = newChoice;
+                bestChoiceIndex = newChoiceIndex;
+            } else if (equalFitnessAndLessCrowded(bestChoiceIndex, newChoiceIndex)) {
+                bestChoice = newChoice;
+                bestChoiceIndex = newChoiceIndex;
             }
         }
         return bestChoice;
+    }
+
+    private boolean equalFitnessAndLessCrowded(int bestChoiceIndex, int newChoiceIndex) {
+        Chromosome newChoice = population.get(newChoiceIndex);
+        Chromosome bestChoice = population.get(bestChoiceIndex);
+        return newChoice.getFitness() == bestChoice.getFitness() && getCrowdingDistance(newChoiceIndex) > getCrowdingDistance(bestChoiceIndex);
+    }
+
+    private double getCrowdingDistance(int chromosomeIndex) {
+        double leftDistance = computeDistanceToLeftNeighbour(chromosomeIndex);
+        double rightDistance = computeDistanceToRightNeighbour(chromosomeIndex);
+
+        if (isBorderChromosome(chromosomeIndex)) {
+            return leftDistance + rightDistance;
+        }
+
+        return (leftDistance + rightDistance) / 2d;
+    }
+
+    private double computeDistanceToRightNeighbour(int index) {
+        if (!isLastFromFront(index)) {
+            return getManhattanDistance(population.get(index), population.get(index + 1));
+        }
+        return 0;
+    }
+
+    private double computeDistanceToLeftNeighbour(int index) {
+        if (!isFirstFromFront(index)) {
+            return getManhattanDistance(population.get(index), population.get(index - 1));
+        }
+        return 0;
+    }
+
+    private boolean isBorderChromosome(int index) {
+        return isFirstFromFront(index) || isLastFromFront(index);
+    }
+
+    private boolean isLastFromFront(int index) {
+        return index == population.size() - 1;
+    }
+
+    private boolean isFirstFromFront(int index) {
+        return index == 0;
+    }
+
+    private double getManhattanDistance(Chromosome chromosome1, Chromosome chromosome2) {
+        double heightDistance = Math.abs(chromosome1.getDepth() - chromosome2.getDepth());
+        double performanceDistances = 0;
+        for (int i = 0; i < chromosome1.getPerformanceMeasures().size(); i++) {
+            performanceDistances += Math.abs(chromosome1.getPerformanceMeasures().get(i).getValue() - chromosome2.getPerformanceMeasures().get(i).getValue());
+        }
+        return heightDistance + performanceDistances;
     }
 
     private Chromosome overSelect() {
@@ -72,15 +130,15 @@ public class ChromosomeRepository {
         population.add(index, offspring);
     }
 
-    /**
-     * Returns true if offspring is better than the worst chromosome from the
-     * population. The worst chromosome from the population is considered the
-     * one that has the biggest fitness
-     */
-    public boolean chromosomeIsWorthy(Chromosome offspring) {
-        return fitnessCalculator.isBetterFitness(offspring.getFitness(),
-                population.get(population.size() - 1).getFitness());
-    }
+//    /**
+//     * Returns true if offspring is better than the worst chromosome from the
+//     * population. The worst chromosome from the population is considered the
+//     * one that has the biggest fitness
+//     */
+//    public boolean chromosomeIsWorthy(Chromosome offspring) {
+//        return wmwPerformanceCalculator.hasBetterPerformance(offspring.getFitness(),
+//                population.get(population.size() - 1).getFitness());
+//    }
 
     /**
      * Returns the best chromosome from the population (the one with the
@@ -100,8 +158,8 @@ public class ChromosomeRepository {
         for (Chromosome c : population) {
             setPerformanceMeasureToChromosome(c, radiographies);
         }
-//        Collections.sort(population);
         evaluatePopulation(objectives);
+        Collections.sort(population);
     }
 
     /**
@@ -113,8 +171,10 @@ public class ChromosomeRepository {
      */
     public void setPerformanceMeasureToChromosome(Chromosome chromosome,
                                                   List<Radiography> radiographies) {
-        chromosome.setWmw(fitnessCalculator.computeFitness(chromosome,
-                radiographies));
+        for (PerformanceMeasure measure : chromosome.getPerformanceMeasures()) {
+            double performanceValue = measure.getPerformanceCalculator().computePerformanceMeasure(chromosome, radiographies);
+            measure.setValue(performanceValue);
+        }
     }
 
     public void evaluatePopulation(List<Objective> objectives) {
@@ -168,9 +228,26 @@ public class ChromosomeRepository {
         Iterator<Chromosome> it = population.iterator();
         while (it.hasNext()) {
             Chromosome chromosome = it.next();
-            if (chromosome.getWmw() < 0.5d) {
-                it.remove();
+            for (PerformanceMeasure measure : chromosome.getPerformanceMeasures()) {
+                if (measure.getValue() < 0.5d) {
+                    it.remove();
+                    break;
+                }
             }
         }
+    }
+
+    public void sort() {
+        Collections.sort(population);
+    }
+
+    public void removeChromosomesThatAreNotFromFront() {
+        while (!isNonDominatedChromosome(population.get(population.size() - 1))) {
+            population.remove(population.size() - 1);
+        }
+    }
+
+    private boolean isNonDominatedChromosome(Chromosome chromosome) {
+        return chromosome.getFitness() == 0;
     }
 }

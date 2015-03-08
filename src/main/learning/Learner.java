@@ -1,32 +1,39 @@
 package learning;
 
+import fitness.PerformanceCalculator;
 import model.Chromosome;
+import model.objective.AccObjective;
 import model.objective.HeightObjective;
 import model.objective.Objective;
 import model.objective.WmwObjective;
 import repository.ChromosomeRepository;
 import repository.RadiographyRepository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 class Learner {
-    private static final int GENERATIONS_NUMBER = 10;
+    private static final int GENERATIONS_NUMBER = 20;
 
     private final Random r;
     private final ChromosomeRepository chromosomeRepository;
     private final RadiographyRepository radiographyRepository;
-    private boolean changed = false;
+    private final List<PerformanceCalculator> calculators;
     private ChromosomeOperator chromosomeOperator;
     private List<Objective> objectives;
 
-    public Learner(ChromosomeRepository chromosomeRepository,
+    public Learner(List<PerformanceCalculator> calculators, ChromosomeRepository chromosomeRepository,
                    RadiographyRepository radiographyRepository, ChromosomeOperator chromosomeOperator, Random r) {
         this.chromosomeRepository = chromosomeRepository;
         this.radiographyRepository = radiographyRepository;
         this.chromosomeOperator = chromosomeOperator;
-        objectives = Arrays.asList(new WmwObjective(), new HeightObjective());
+        objectives = new ArrayList<Objective>();
+        objectives.add(new WmwObjective());
+        objectives.add(new AccObjective());
+//        objectives = Arrays.asList(new WmwObjective(), new AccObjective(), new HeightObjective());
+        this.calculators = calculators;
         this.r = r;
     }
 
@@ -34,20 +41,14 @@ class Learner {
         chromosomeRepository.setPopulationFitness(radiographyRepository
                 .getTrainRadiographies(), objectives);
 
-        int notChangedNumber = 0;
         for (int g = 0; g < GENERATIONS_NUMBER; g++) {
-            changed = false;
             for (int i = 0; i < ChromosomeRepository.POPULATION_NUMBER; i++) {
+                //TODO add chromosomes in a separate list and merge the lists to create the archive
                 improvePopulation();
                 evaluatePopulation();
+                chromosomeRepository.sort();
             }
             removeUnworthyDescendants();
-            if (!changed) {
-                notChangedNumber++;
-            }
-            if (notChangedNumber >= 100) {
-                break;
-            }
         }
 
         evaluateBasedOnValidationSet();
@@ -58,6 +59,7 @@ class Learner {
     private void evaluateBasedOnValidationSet() {
         chromosomeRepository.setPopulationFitness(radiographyRepository.getValidationRadiographies(), objectives);
         chromosomeRepository.removeChromosomesThatAreWorseThanRandom();
+        chromosomeRepository.removeChromosomesThatAreNotFromFront();
     }
 
     private void removeUnworthyDescendants() {
@@ -79,7 +81,7 @@ class Learner {
         Chromosome offspring;
         Chromosome mother = chromosomeRepository.selectParent();
         Chromosome father = chromosomeRepository.selectParent();
-        offspring = chromosomeOperator.xo(mother, father, r);
+        offspring = chromosomeOperator.xo(calculators, mother, father, r);
         if (r.nextDouble() > 0.9) {
             offspring = chromosomeOperator.mutation(offspring, r);
         }
@@ -88,12 +90,5 @@ class Learner {
 
     private void addChromosome(Chromosome offspring) {
         chromosomeRepository.addChromosome(offspring);
-    }
-
-    private void addChromosomeIfWorthy(Chromosome offspring) {
-        if (chromosomeRepository.chromosomeIsWorthy(offspring)) {
-            chromosomeRepository.addChromosome(offspring);
-            changed = true;
-        }
     }
 }

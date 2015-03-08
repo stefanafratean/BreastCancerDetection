@@ -8,17 +8,22 @@ import repository.FitnessHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WmwFitnessCalculator implements FitnessCalculator {
+public class WmwPerformanceCalculator implements PerformanceCalculator {
 
     private ChromosomeOperator chromosomeOperator;
+    private static WmwPerformanceCalculator instance;
 
-    public WmwFitnessCalculator(ChromosomeOperator chromosomeOperator) {
+    public WmwPerformanceCalculator() {
+
+    }
+
+    public WmwPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
         this.chromosomeOperator = chromosomeOperator;
     }
 
     @Override
-    public double computeFitness(Chromosome chromosome,
-                                 List<Radiography> radiographies) {
+    public double computePerformanceMeasure(Chromosome chromosome,
+                                            List<Radiography> radiographies) {
         List<Double> positiveClassOutputs = new ArrayList<Double>();
         List<Double> negativeClassOutputs = new ArrayList<Double>();
 
@@ -44,8 +49,14 @@ public class WmwFitnessCalculator implements FitnessCalculator {
     }
 
     @Override
-    public boolean isBetterFitness(double fitness1, double fitness2) {
-        return FitnessHelper.fitnessHasBiggerValue(fitness1, fitness2);
+    public boolean hasBetterPerformance(double performance1, double performance2) {
+        return FitnessHelper.fitnessHasBiggerValue(performance1, performance2);
     }
 
+    public static PerformanceCalculator getInstance() {
+        if (instance == null) {
+            return new WmwPerformanceCalculator();
+        }
+        return instance;
+    }
 }

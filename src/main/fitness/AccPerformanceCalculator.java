@@ -9,20 +9,25 @@ import repository.FitnessHelper;
 import java.util.List;
 
 /**
- * Computes the overall accuracy fitness. The optimal fitness is 1, the worst
- * possible fitness value is 0.
+ * Computes the overall accuracy. The optimal value is 1, the worst
+ * possible value is 0.
  */
-public class AccFitnessCalculator implements FitnessCalculator {
+public class AccPerformanceCalculator implements PerformanceCalculator {
 
+    private static PerformanceCalculator instance;
     private ChromosomeOperator chromosomeOperator;
 
-    public AccFitnessCalculator(ChromosomeOperator chromosomeOperator) {
+    public AccPerformanceCalculator() {
+
+    }
+
+    public AccPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
         this.chromosomeOperator = chromosomeOperator;
     }
 
     @Override
-    public double computeFitness(Chromosome chromosome,
-                                 List<Radiography> radiographies) {
+    public double computePerformanceMeasure(Chromosome chromosome,
+                                            List<Radiography> radiographies) {
         ConfusionValuesWrapper confusionValues = new ConfusionValuesWrapper();
         for (Radiography r : radiographies) {
             double chromosomeOutput = chromosomeOperator.getOutputValue(
@@ -48,9 +53,15 @@ public class AccFitnessCalculator implements FitnessCalculator {
     }
 
     @Override
-    public boolean isBetterFitness(double fitness1, double fitness2) {
-        return FitnessHelper.fitnessAreEqual(fitness1, fitness2)
-                || FitnessHelper.fitnessHasBiggerValue(fitness1, fitness2);
+    public boolean hasBetterPerformance(double performance1, double performance2) {
+        return FitnessHelper.fitnessAreEqual(performance1, performance2)
+                || FitnessHelper.fitnessHasBiggerValue(performance1, performance2);
     }
 
+    public static PerformanceCalculator getInstance() {
+        if (instance == null) {
+            return new AccPerformanceCalculator();
+        }
+        return instance;
+    }
 }

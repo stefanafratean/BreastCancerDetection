@@ -9,17 +9,17 @@ import repository.FitnessHelper;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class AucFitnessCalculator implements FitnessCalculator {
+public class AucPerformanceCalculator implements PerformanceCalculator {
 
     private ChromosomeOperator chromosomeOperator;
 
-    public AucFitnessCalculator(ChromosomeOperator chromosomeOperator) {
+    public AucPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
         this.chromosomeOperator = chromosomeOperator;
     }
 
     @Override
-    public double computeFitness(Chromosome chromosome,
-                                 List<Radiography> radiographies) {
+    public double computePerformanceMeasure(Chromosome chromosome,
+                                            List<Radiography> radiographies) {
         AucValuesWrapper aucValues = new AucValuesWrapper();
         computeOutputs(chromosome, radiographies, aucValues);
         double auc = 0;
@@ -89,9 +89,9 @@ public class AucFitnessCalculator implements FitnessCalculator {
     }
 
     @Override
-    public boolean isBetterFitness(double fitness1, double fitness2) {
-        return FitnessHelper.fitnessAreEqual(fitness1, fitness2)
-                || FitnessHelper.fitnessHasBiggerValue(fitness1, fitness2);
+    public boolean hasBetterPerformance(double performance1, double performance2) {
+        return FitnessHelper.fitnessAreEqual(performance1, performance2)
+                || FitnessHelper.fitnessHasBiggerValue(performance1, performance2);
     }
 
 }

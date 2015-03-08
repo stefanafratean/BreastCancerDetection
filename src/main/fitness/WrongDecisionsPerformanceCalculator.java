@@ -12,17 +12,17 @@ import java.util.List;
  * optimal fitness is 0, the worst possible fitness is equal with the number of
  * processed radiographies
  */
-public class WrongDecisionsFitnessCalculator implements FitnessCalculator {
+public class WrongDecisionsPerformanceCalculator implements PerformanceCalculator {
 
     private ChromosomeOperator chromosomeOperator;
 
-    public WrongDecisionsFitnessCalculator(ChromosomeOperator chromosomeOperator) {
+    public WrongDecisionsPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
         this.chromosomeOperator = chromosomeOperator;
     }
 
     @Override
-    public double computeFitness(Chromosome chromosome,
-                                 List<Radiography> radiographies) {
+    public double computePerformanceMeasure(Chromosome chromosome,
+                                            List<Radiography> radiographies) {
         double fitness = 0;
         for (Radiography r : radiographies) {
             double chromosomeOutput = chromosomeOperator.getOutputValue(
@@ -35,9 +35,9 @@ public class WrongDecisionsFitnessCalculator implements FitnessCalculator {
     }
 
     @Override
-    public boolean isBetterFitness(double fitness1, double fitness2) {
-        return FitnessHelper.fitnessAreEqual(fitness1, fitness2)
-                || !FitnessHelper.fitnessHasBiggerValue(fitness1, fitness2);
+    public boolean hasBetterPerformance(double performance1, double performance2) {
+        return FitnessHelper.fitnessAreEqual(performance1, performance2)
+                || !FitnessHelper.fitnessHasBiggerValue(performance1, performance2);
     }
 
     private static boolean madeWrongDecision(Radiography r,
