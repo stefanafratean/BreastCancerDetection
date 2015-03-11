@@ -14,12 +14,7 @@ import java.util.List;
  */
 public class AccPerformanceCalculator implements PerformanceCalculator {
 
-    private static PerformanceCalculator instance;
     private ChromosomeOperator chromosomeOperator;
-
-    public AccPerformanceCalculator() {
-
-    }
 
     public AccPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
         this.chromosomeOperator = chromosomeOperator;
@@ -33,22 +28,22 @@ public class AccPerformanceCalculator implements PerformanceCalculator {
             double chromosomeOutput = chromosomeOperator.getOutputValue(
                     chromosome, r);
             predictValue(confusionValues,
-                    FitnessHelper.getCancerDecision(chromosomeOutput),
+                    FitnessHelper.itHasCancer(chromosomeOutput),
                     r.isWithCancer());
         }
         return confusionValues.getOverallAccuracy();
     }
 
-    private static void predictValue(ConfusionValuesWrapper confuzionValues,
-                                     boolean predictedPositive, boolean actualpositive) {
-        if (predictedPositive && actualpositive) {
-            confuzionValues.increaseTP();
-        } else if (predictedPositive && !actualpositive) {
-            confuzionValues.increaseFP();
-        } else if (!predictedPositive && !actualpositive) {
-            confuzionValues.increaseTN();
+    private void predictValue(ConfusionValuesWrapper confusionValues,
+                              boolean predictedPositive, boolean actualPositive) {
+        if (predictedPositive && actualPositive) {
+            confusionValues.increaseTP();
+        } else if (predictedPositive && !actualPositive) {
+            confusionValues.increaseFP();
+        } else if (!predictedPositive && !actualPositive) {
+            confusionValues.increaseTN();
         } else {
-            confuzionValues.increaseFN();
+            confusionValues.increaseFN();
         }
     }
 
@@ -56,12 +51,5 @@ public class AccPerformanceCalculator implements PerformanceCalculator {
     public boolean hasBetterPerformance(double performance1, double performance2) {
         return FitnessHelper.fitnessAreEqual(performance1, performance2)
                 || FitnessHelper.fitnessHasBiggerValue(performance1, performance2);
-    }
-
-    public static PerformanceCalculator getInstance() {
-        if (instance == null) {
-            return new AccPerformanceCalculator();
-        }
-        return instance;
     }
 }

@@ -50,7 +50,8 @@ public class ChromosomeRepository {
             if (newChoice.getFitness() < bestChoice.getFitness()) {
                 bestChoice = newChoice;
                 bestChoiceIndex = newChoiceIndex;
-            } else if (equalFitnessAndLessCrowded(bestChoiceIndex, newChoiceIndex)) {
+                //TODO check if crowding distance supposed to be bigger or smaller
+            } else if (equalFitnessInLessCrowdedArea(newChoiceIndex, bestChoiceIndex)) {
                 bestChoice = newChoice;
                 bestChoiceIndex = newChoiceIndex;
             }
@@ -58,57 +59,6 @@ public class ChromosomeRepository {
         return bestChoice;
     }
 
-    private boolean equalFitnessAndLessCrowded(int bestChoiceIndex, int newChoiceIndex) {
-        Chromosome newChoice = population.get(newChoiceIndex);
-        Chromosome bestChoice = population.get(bestChoiceIndex);
-        return newChoice.getFitness() == bestChoice.getFitness() && getCrowdingDistance(newChoiceIndex) > getCrowdingDistance(bestChoiceIndex);
-    }
-
-    private double getCrowdingDistance(int chromosomeIndex) {
-        double leftDistance = computeDistanceToLeftNeighbour(chromosomeIndex);
-        double rightDistance = computeDistanceToRightNeighbour(chromosomeIndex);
-
-        if (isBorderChromosome(chromosomeIndex)) {
-            return leftDistance + rightDistance;
-        }
-
-        return (leftDistance + rightDistance) / 2d;
-    }
-
-    private double computeDistanceToRightNeighbour(int index) {
-        if (!isLastFromFront(index)) {
-            return getManhattanDistance(population.get(index), population.get(index + 1));
-        }
-        return 0;
-    }
-
-    private double computeDistanceToLeftNeighbour(int index) {
-        if (!isFirstFromFront(index)) {
-            return getManhattanDistance(population.get(index), population.get(index - 1));
-        }
-        return 0;
-    }
-
-    private boolean isBorderChromosome(int index) {
-        return isFirstFromFront(index) || isLastFromFront(index);
-    }
-
-    private boolean isLastFromFront(int index) {
-        return index == population.size() - 1;
-    }
-
-    private boolean isFirstFromFront(int index) {
-        return index == 0;
-    }
-
-    private double getManhattanDistance(Chromosome chromosome1, Chromosome chromosome2) {
-        double heightDistance = Math.abs(chromosome1.getDepth() - chromosome2.getDepth());
-        double performanceDistances = 0;
-        for (int i = 0; i < chromosome1.getPerformanceMeasures().size(); i++) {
-            performanceDistances += Math.abs(chromosome1.getPerformanceMeasures().get(i).getValue() - chromosome2.getPerformanceMeasures().get(i).getValue());
-        }
-        return heightDistance + performanceDistances;
-    }
 
     private Chromosome overSelect() {
         if (r.nextDouble() < 0.8d) {
@@ -127,7 +77,19 @@ public class ChromosomeRepository {
         if (index < 0) {
             index = ~index;
         }
-        population.add(index, offspring);
+
+        if (doesNotExist(offspring)) {
+            population.add(index, offspring);
+        }
+    }
+
+    private boolean doesNotExist(Chromosome offspring) {
+        for (Chromosome c : population) {
+            if (offspring.equals(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 //    /**
@@ -152,14 +114,14 @@ public class ChromosomeRepository {
      * Sets the fitness for each of the chromosomes in the population.
      *
      * @param radiographies The list of radiographies.
-     * @param objectives
+     * @param objectives    List of objectives to be evaluated.
      */
     public void setPopulationFitness(List<Radiography> radiographies, List<Objective> objectives) {
         for (Chromosome c : population) {
             setPerformanceMeasureToChromosome(c, radiographies);
         }
         evaluatePopulation(objectives);
-        Collections.sort(population);
+        sort();
     }
 
     /**
@@ -214,7 +176,7 @@ public class ChromosomeRepository {
     }
 
     public void removeUnworthyDescendants() {
-        Collections.sort(population);
+        sort();
         while (population.size() > POPULATION_NUMBER) {
             population.remove(population.size() - 1);
         }
@@ -238,7 +200,28 @@ public class ChromosomeRepository {
     }
 
     public void sort() {
-        Collections.sort(population);
+        //TODO remove this and use the parametrized one
+//        for (int i = 0; i < population.size(); i++) {
+//            for (int j = i + 1; j < population.size(); j++) {
+//                if (shouldChange(i, j)) {
+//                    Chromosome aux = population.get(i);
+//                    population.set(i, population.get(j));
+//                    population.set(j, aux);
+//                }
+//            }
+//        }
+        Collections.sort(population, new CrowdingDistanceAwareComparator(population));
+    }
+
+    private boolean equalFitnessInLessCrowdedArea(int i, int j) {
+        Chromosome chromosome1 = population.get(i);
+        Chromosome chromosome2 = population.get(j);
+        CrowdingDistanceComputer computer = new CrowdingDistanceComputer();
+        return chromosome1.compareTo(chromosome2) == 0 && computer.getCrowdingDistance(population, i) > computer.getCrowdingDistance(population, j);
+    }
+
+    private boolean hasBetterFitness(int i, int j) {
+        return population.get(i).compareTo(population.get(j)) > 0;
     }
 
     public void removeChromosomesThatAreNotFromFront() {

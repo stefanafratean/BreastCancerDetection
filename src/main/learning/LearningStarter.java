@@ -6,6 +6,7 @@ import fitness.WmwPerformanceCalculator;
 import model.Chromosome;
 import model.Radiography;
 import repository.ChromosomeRepository;
+import repository.FitnessHelper;
 import repository.RadiographyRepository;
 import results.ResultsProcessor;
 import results.WrongEntry;
@@ -62,12 +63,12 @@ public class LearningStarter {
         // CV evaluation part 2
         List<Chromosome> paretoFront = learner.findParetoFront();
 
-        WrongEntry wrongEntry = classifyWmw(paretoFront);
+        WrongEntry wrongEntry = classifyForEachObjective(paretoFront);
         return wrongEntry;
     }
 
     //TODO take into account all performance measures for the classification
-    private WrongEntry classifyWmw(List<Chromosome> paretoFrontChromosomes) {
+    private WrongEntry classifyForEachObjective(List<Chromosome> paretoFrontChromosomes) {
         List<Integer> negativeClassSizes = new ArrayList<Integer>();
         for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
             negativeClassSizes.add(0);
@@ -94,9 +95,17 @@ public class LearningStarter {
             int normalCount = 0;
             for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
                 double outputForCurrentChr = chromosomeOperator.getOutputValue(paretoFrontChromosomes.get(i), r);
+                //wmw decision
                 ArrayList<Double> outputsForCurrentChr = outputs.get(i);
                 Integer negativeClassSizeForCurrentChr = negativeClassSizes.get(i);
                 if (outputForCurrentChr > outputsForCurrentChr.get(negativeClassSizeForCurrentChr)) {
+                    cancerCount++;
+                } else {
+                    normalCount++;
+                }
+
+                //acc decision
+                if (FitnessHelper.itHasCancer(outputForCurrentChr)) {
                     cancerCount++;
                 } else {
                     normalCount++;

@@ -7,6 +7,7 @@ import model.functions.Function;
 import model.functions.FunctionHelper;
 import model.functions.TwoArgumentsFunction;
 import model.performancemeasure.PerformanceMeasure;
+import util.MathUtil;
 import util.Node;
 import util.Tree;
 
@@ -114,8 +115,9 @@ public class ChromosomeOperator {
      */
     public double getOutputValue(Chromosome chromosome,
                                  Radiography radiography) {
-        return getOutputValue(chromosome.getRepresentation().getRoot(),
+        double rawValue = getOutputValue(chromosome.getRepresentation().getRoot(),
                 radiography);
+        return MathUtil.sigmoid(rawValue);
     }
 
     private double getOutputValue(Node<Integer> node,

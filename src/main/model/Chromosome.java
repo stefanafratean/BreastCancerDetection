@@ -39,7 +39,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
     @Override
     public String toString() {
-        return "" + fitness;
+        return "" + fitness + performanceMeasures.toString();
     }
 
     public double getFitness() {
@@ -64,6 +64,23 @@ public class Chromosome implements Comparable<Chromosome> {
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        //TODO this is not a great implementation, it would be better to check if the actual trees are equal
+        if (!(obj instanceof Chromosome)) {
+            return false;
+        }
+        Chromosome other = (Chromosome) obj;
+        for (int i = 0; i < this.performanceMeasures.size(); i++){
+            PerformanceMeasure measureForThis = this.performanceMeasures.get(i);
+            PerformanceMeasure measureForOther = other.performanceMeasures.get(i);
+            if (!measureForThis.equals(measureForOther)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public Chromosome clone() throws CloneNotSupportedException {

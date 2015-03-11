@@ -11,11 +11,6 @@ import java.util.List;
 public class WmwPerformanceCalculator implements PerformanceCalculator {
 
     private ChromosomeOperator chromosomeOperator;
-    private static WmwPerformanceCalculator instance;
-
-    public WmwPerformanceCalculator() {
-
-    }
 
     public WmwPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
         this.chromosomeOperator = chromosomeOperator;
@@ -39,7 +34,7 @@ public class WmwPerformanceCalculator implements PerformanceCalculator {
         double sum = 0;
         for (Double positiveClassOutput : positiveClassOutputs) {
             for (Double negativeClassOutput : negativeClassOutputs) {
-                if (positiveClassOutput > 0 && positiveClassOutput > negativeClassOutput) {
+                if (positiveClassOutput > 0.5 && positiveClassOutput > negativeClassOutput) {
                     sum++;
                 }
             }
@@ -51,12 +46,5 @@ public class WmwPerformanceCalculator implements PerformanceCalculator {
     @Override
     public boolean hasBetterPerformance(double performance1, double performance2) {
         return FitnessHelper.fitnessHasBiggerValue(performance1, performance2);
-    }
-
-    public static PerformanceCalculator getInstance() {
-        if (instance == null) {
-            return new WmwPerformanceCalculator();
-        }
-        return instance;
     }
 }

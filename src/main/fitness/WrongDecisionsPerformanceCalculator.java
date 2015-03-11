@@ -42,7 +42,7 @@ public class WrongDecisionsPerformanceCalculator implements PerformanceCalculato
 
     private static boolean madeWrongDecision(Radiography r,
                                              double chromosomeOutput) {
-        return FitnessHelper.getCancerDecision(chromosomeOutput) != r
+        return FitnessHelper.itHasCancer(chromosomeOutput) != r
                 .isWithCancer();
     }
 

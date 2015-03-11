@@ -39,4 +39,13 @@ public class PerformanceMeasure {
     public String toString() {
         return "" + value;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof PerformanceMeasure)) {
+            return false;
+        }
+        PerformanceMeasure other = (PerformanceMeasure) obj;
+        return other.value == this.value;
+    }
 }
