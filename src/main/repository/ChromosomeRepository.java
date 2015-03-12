@@ -116,12 +116,11 @@ public class ChromosomeRepository {
      * @param radiographies The list of radiographies.
      * @param objectives    List of objectives to be evaluated.
      */
-    public void setPopulationFitness(List<Radiography> radiographies, List<Objective> objectives) {
+    public void setPopulationPerformanceAndFitness(List<Radiography> radiographies, List<Objective> objectives) {
         for (Chromosome c : population) {
             setPerformanceMeasureToChromosome(c, radiographies);
         }
         evaluatePopulation(objectives);
-        sort();
     }
 
     /**
@@ -191,7 +190,7 @@ public class ChromosomeRepository {
         while (it.hasNext()) {
             Chromosome chromosome = it.next();
             for (PerformanceMeasure measure : chromosome.getPerformanceMeasures()) {
-                if (measure.getValue() < 0.5d) {
+                if (measure.getValue() < 0.5d && it.hasNext()) {
                     it.remove();
                     break;
                 }
@@ -201,15 +200,6 @@ public class ChromosomeRepository {
 
     public void sort() {
         //TODO remove this and use the parametrized one
-//        for (int i = 0; i < population.size(); i++) {
-//            for (int j = i + 1; j < population.size(); j++) {
-//                if (shouldChange(i, j)) {
-//                    Chromosome aux = population.get(i);
-//                    population.set(i, population.get(j));
-//                    population.set(j, aux);
-//                }
-//            }
-//        }
         Collections.sort(population, new CrowdingDistanceAwareComparator(population));
     }
 
@@ -225,6 +215,7 @@ public class ChromosomeRepository {
     }
 
     public void removeChromosomesThatAreNotFromFront() {
+        sort();
         while (!isNonDominatedChromosome(population.get(population.size() - 1))) {
             population.remove(population.size() - 1);
         }
@@ -232,5 +223,11 @@ public class ChromosomeRepository {
 
     private boolean isNonDominatedChromosome(Chromosome chromosome) {
         return chromosome.getFitness() == 0;
+    }
+
+    public void addNewGeneration(List<Chromosome> newDescendants) {
+        for (Chromosome c : newDescendants) {
+            addChromosome(c);
+        }
     }
 }

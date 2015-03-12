@@ -8,7 +8,7 @@ public class FitnessHelper {
     }
 
     public static boolean itHasCancer(double chromosomeOutput) {
-        return chromosomeOutput > 0.5;
+        return chromosomeOutput > 0;
     }
 
     public static boolean fitnessHasBiggerValue(double fitness1, double fitness2) {

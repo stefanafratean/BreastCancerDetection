@@ -3,19 +3,17 @@ package learning;
 import fitness.PerformanceCalculator;
 import model.Chromosome;
 import model.objective.AccObjective;
-import model.objective.HeightObjective;
 import model.objective.Objective;
 import model.objective.WmwObjective;
 import repository.ChromosomeRepository;
 import repository.RadiographyRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 class Learner {
-    private static final int GENERATIONS_NUMBER = 20;
+    private static final int GENERATIONS_NUMBER = 100;
 
     private final Random r;
     private final ChromosomeRepository chromosomeRepository;
@@ -38,16 +36,17 @@ class Learner {
     }
 
     public List<Chromosome> findParetoFront() {
-        chromosomeRepository.setPopulationFitness(radiographyRepository
+        chromosomeRepository.setPopulationPerformanceAndFitness(radiographyRepository
                 .getTrainRadiographies(), objectives);
 
         for (int g = 0; g < GENERATIONS_NUMBER; g++) {
+            List<Chromosome> newDescendants = new ArrayList<Chromosome>();
             for (int i = 0; i < ChromosomeRepository.POPULATION_NUMBER; i++) {
-                //TODO add chromosomes in a separate list and merge the lists to create the archive
-                improvePopulation();
-                evaluatePopulation();
-                chromosomeRepository.sort();
+//                improvePopulation();
+                newDescendants.add(createEvaluatedChromosome());
             }
+            chromosomeRepository.addNewGeneration(newDescendants);
+            evaluatePopulation();
             removeUnworthyDescendants();
         }
 
@@ -57,8 +56,8 @@ class Learner {
     }
 
     private void evaluateBasedOnValidationSet() {
-        chromosomeRepository.setPopulationFitness(radiographyRepository.getValidationRadiographies(), objectives);
-        chromosomeRepository.removeChromosomesThatAreWorseThanRandom();
+        chromosomeRepository.setPopulationPerformanceAndFitness(radiographyRepository.getValidationRadiographies(), objectives);
+//        chromosomeRepository.removeChromosomesThatAreWorseThanRandom();
         chromosomeRepository.removeChromosomesThatAreNotFromFront();
     }
 
@@ -71,10 +70,15 @@ class Learner {
     }
 
     private void improvePopulation() {
+        Chromosome offspring = createEvaluatedChromosome();
+        addChromosome(offspring);
+    }
+
+    private Chromosome createEvaluatedChromosome() {
         Chromosome offspring = createNewChromosome();
         chromosomeRepository.setPerformanceMeasureToChromosome(offspring,
                 radiographyRepository.getTrainRadiographies());
-        addChromosome(offspring);
+        return offspring;
     }
 
     private Chromosome createNewChromosome() {

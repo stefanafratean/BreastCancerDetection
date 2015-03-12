@@ -26,7 +26,7 @@ public class LearningStarter {
         Random r = new Random();
         int radiographyNb = radiographyRepository.getRadiographyNb();
         int cancerNb = radiographyRepository.getCancerRadNb();
-        int iterations = 100;
+        int iterations = 10;
         ResultsProcessor resProcessor = new ResultsProcessor(radiographyNb,
                 cancerNb, iterations);
 
@@ -91,13 +91,14 @@ public class LearningStarter {
         // rad startLearning
         for (Radiography r : radiographyRepository.getTestRadiographies()) {
             boolean withCancer = false;
-            int cancerCount = 0;
-            int normalCount = 0;
+            double cancerCount = 0d;
+            double normalCount = 0d;
             for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
                 double outputForCurrentChr = chromosomeOperator.getOutputValue(paretoFrontChromosomes.get(i), r);
                 //wmw decision
                 ArrayList<Double> outputsForCurrentChr = outputs.get(i);
                 Integer negativeClassSizeForCurrentChr = negativeClassSizes.get(i);
+                double wmwWeight = paretoFrontChromosomes.get(i).getPerformanceMeasures().get(0).getValue();
                 if (outputForCurrentChr > outputsForCurrentChr.get(negativeClassSizeForCurrentChr)) {
                     cancerCount++;
                 } else {
@@ -105,13 +106,14 @@ public class LearningStarter {
                 }
 
                 //acc decision
+                double accWeight = paretoFrontChromosomes.get(i).getPerformanceMeasures().get(1).getValue();
                 if (FitnessHelper.itHasCancer(outputForCurrentChr)) {
                     cancerCount++;
                 } else {
                     normalCount++;
                 }
             }
-            if (cancerCount > normalCount) {
+            if (cancerCount >= normalCount) {
                 withCancer = true;
             }
             if (withCancer != r.isWithCancer()) {

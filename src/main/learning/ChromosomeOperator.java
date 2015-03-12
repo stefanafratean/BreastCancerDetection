@@ -117,7 +117,8 @@ public class ChromosomeOperator {
                                  Radiography radiography) {
         double rawValue = getOutputValue(chromosome.getRepresentation().getRoot(),
                 radiography);
-        return MathUtil.sigmoid(rawValue);
+//        return MathUtil.sigmoid(rawValue);
+        return rawValue;
     }
 
     private double getOutputValue(Node<Integer> node,
