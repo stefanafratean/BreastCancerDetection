@@ -37,12 +37,4 @@ public class Node<T> {
     public void setRight(Node<T> right) {
         this.right = right;
     }
-
-    public void addLeft(Node<T> node) {
-        this.left = node;
-    }
-
-    public void addRight(Node<T> node) {
-        this.right = node;
-    }
 }

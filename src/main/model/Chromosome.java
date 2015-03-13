@@ -73,14 +73,14 @@ public class Chromosome implements Comparable<Chromosome> {
             return false;
         }
         Chromosome other = (Chromosome) obj;
-        for (int i = 0; i < this.performanceMeasures.size(); i++){
-            PerformanceMeasure measureForThis = this.performanceMeasures.get(i);
-            PerformanceMeasure measureForOther = other.performanceMeasures.get(i);
-            if (!measureForThis.equals(measureForOther)){
-                return false;
-            }
-        }
-        return true;
+//        for (int i = 0; i < this.performanceMeasures.size(); i++){
+//            PerformanceMeasure measureForThis = this.performanceMeasures.get(i);
+//            PerformanceMeasure measureForOther = other.performanceMeasures.get(i);
+//            if (!measureForThis.equals(measureForOther)){
+//                return false;
+//            }
+//        }
+        return this.representation.equals(other.representation);
     }
 
     public Chromosome clone() throws CloneNotSupportedException {

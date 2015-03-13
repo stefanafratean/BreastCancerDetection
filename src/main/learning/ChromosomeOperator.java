@@ -178,9 +178,9 @@ public class ChromosomeOperator {
             // TODO see if can use lambda expr instead
             if (currentDepth == 0 || !switchParent(r)) {
                 //	if (FunctionHelper.nodeIsFunction(childNode)){
-                childNode.addLeft(buildChild(parentNode1.getLeft(),
+                childNode.setLeft(buildChild(parentNode1.getLeft(),
                         parentNode2, r, currentDepth + 1));
-                childNode.addRight(buildChild(parentNode1.getRight(),
+                childNode.setRight(buildChild(parentNode1.getRight(),
                         parentNode2, r, currentDepth + 1));
                 //	}
             } else {
