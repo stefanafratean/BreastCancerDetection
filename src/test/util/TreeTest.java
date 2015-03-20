@@ -2,8 +2,7 @@ package util;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TreeTest {
     private final static String LEFT = "LEFT";
@@ -60,5 +59,28 @@ public class TreeTest {
         Node<String> right = new Node<String>();
         right.setData(data);
         return right;
+    }
+
+    @Test
+    public void tree_with_one_has_height_zero() {
+        Tree<String> tree = new Tree<String>(new Node<String>());
+
+        assertEquals(0, tree.getHeight());
+    }
+
+    @Test
+    public void height_correctly_computed_for_complete_tree() {
+        Tree<String> tree = createTreeWithHeightOne(ROOT, LEFT, RIGHT);
+
+        assertEquals(1, tree.getHeight());
+    }
+
+    @Test
+    public void height_correctly_computed_for_incomplete_tree() {
+        Tree<String> tree = createTreeWithHeightOne(ROOT, LEFT, RIGHT);
+        Node<String> node = new Node<String>();
+        tree.getRoot().getRight().setRight(node);
+
+        assertEquals(2, tree.getHeight());
     }
 }

@@ -92,18 +92,10 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public int getDepth() {
-        return getDepth(representation.getRoot());
+        return representation.getHeight();
     }
 
-    private int getDepth(Node<Integer> node) {
-        if (node.getLeft() == null && node.getRight() == null) {
-            return 0;
-        }
-        int leftDepth = getDepth(node.getLeft()) + 1;
-        int rightDepth = getDepth(node.getRight()) + 1;
 
-        return Collections.max(Arrays.asList(leftDepth, rightDepth));
-    }
 
     public List<PerformanceMeasure> getPerformanceMeasures() {
         return performanceMeasures;

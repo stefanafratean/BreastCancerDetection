@@ -1,17 +1,19 @@
 package learning;
 
-import fitness.AccPerformanceCalculator;
+import fitness.HeightPerformanceCalculator;
 import fitness.PerformanceCalculator;
 import fitness.WmwPerformanceCalculator;
 import model.Chromosome;
 import model.Radiography;
 import repository.ChromosomeRepository;
-import repository.FitnessHelper;
 import repository.RadiographyRepository;
 import results.ResultsProcessor;
 import results.WrongEntry;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class LearningStarter {
     private RadiographyRepository radiographyRepository;
@@ -24,6 +26,8 @@ public class LearningStarter {
 
     public void startLearning() {
         Random r = new Random();
+        List<PerformanceCalculator> calculators = getPerformanceCalculators();
+
         int radiographyNb = radiographyRepository.getRadiographyNb();
         int cancerNb = radiographyRepository.getCancerRadNb();
         int iterations = 10;
@@ -31,17 +35,29 @@ public class LearningStarter {
                 cancerNb, iterations);
 
         for (int i = 0; i < iterations; i++) {
-            WrongEntry wrongsPerCross = performCrossExperiment(r);
+            WrongEntry wrongsPerCross = performCrossExperiment(r, calculators);
             resProcessor.computeAndShowResults(wrongsPerCross);
         }
 
         resProcessor.computeAndShowGlobals();
     }
 
-    private WrongEntry performCrossExperiment(Random r) {
+    private List<PerformanceCalculator> getPerformanceCalculators() {
+        PerformanceCalculator wmwPerformanceCalculator = new WmwPerformanceCalculator(chromosomeOperator);
+//        PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(chromosomeOperator);
+        PerformanceCalculator heightPerformanceCalculator = new HeightPerformanceCalculator();
+//        return Arrays.asList(wmwPerformanceCalculator, accPerformanceCalculator);
+        List<PerformanceCalculator> list = new ArrayList<PerformanceCalculator>();
+        list.add(wmwPerformanceCalculator);
+        list.add(heightPerformanceCalculator);
+
+        return list;
+    }
+
+    private WrongEntry performCrossExperiment(Random r, List<PerformanceCalculator> calculators) {
         WrongEntry wrongsPerCross = new WrongEntry(0, 0);
         for (int j = 0; j < 10; j++) {
-            WrongEntry wrongPerSubFold = performSubFold(r);
+            WrongEntry wrongPerSubFold = performSubFold(r, calculators);
             wrongsPerCross.add(wrongPerSubFold);
             radiographyRepository.increaseCurrentSubset();
         }
@@ -52,10 +68,8 @@ public class LearningStarter {
         return wrongsPerCross;
     }
 
-    private WrongEntry performSubFold(Random r) {
-        PerformanceCalculator wmwPerformanceCalculator = new WmwPerformanceCalculator(chromosomeOperator);
-        PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(chromosomeOperator);
-        List<PerformanceCalculator> calculators = Arrays.asList(wmwPerformanceCalculator, accPerformanceCalculator);
+    private WrongEntry performSubFold(Random r, List<PerformanceCalculator> calculators) {
+
         ChromosomeRepository chromosomeRepository = new ChromosomeRepository(calculators, r, chromosomeOperator);
         Learner learner = new Learner(calculators, chromosomeRepository,
                 radiographyRepository, chromosomeOperator, r);
@@ -106,12 +120,12 @@ public class LearningStarter {
                 }
 
                 //acc decision
-                double accWeight = paretoFrontChromosomes.get(i).getPerformanceMeasures().get(1).getValue();
-                if (FitnessHelper.itHasCancer(outputForCurrentChr)) {
-                    cancerCount++;
-                } else {
-                    normalCount++;
-                }
+//                double accWeight = paretoFrontChromosomes.get(i).getPerformanceMeasures().get(1).getValue();
+//                if (FitnessHelper.itHasCancer(outputForCurrentChr)) {
+//                    cancerCount++;
+//                } else {
+//                    normalCount++;
+//                }
             }
             if (cancerCount >= normalCount) {
                 withCancer = true;

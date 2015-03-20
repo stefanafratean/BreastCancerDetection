@@ -2,7 +2,7 @@ package learning;
 
 import fitness.PerformanceCalculator;
 import model.Chromosome;
-import model.objective.AccObjective;
+import model.objective.HeightObjective;
 import model.objective.Objective;
 import model.objective.WmwObjective;
 import repository.ChromosomeRepository;
@@ -29,7 +29,8 @@ class Learner {
         this.chromosomeOperator = chromosomeOperator;
         objectives = new ArrayList<Objective>();
         objectives.add(new WmwObjective());
-        objectives.add(new AccObjective());
+        objectives.add(new HeightObjective());
+//        objectives.add(new AccObjective());
 //        objectives = Arrays.asList(new WmwObjective(), new AccObjective(), new HeightObjective());
         this.calculators = calculators;
         this.r = r;

@@ -1,11 +1,11 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Tree<T> {
-    //TODO regard this as a tree that contains a left subtree and a right subtree (which are also trees)
-    //TODO the node class can be then removed
     private final Node<T> root;
 
     public Tree(T data) {
@@ -63,7 +63,6 @@ public class Tree<T> {
         toCheckFor2.add(0, node2.getLeft());
         toCheckFor2.add(0, node2.getRight());
 
-        // dupa ce verific subarborele drept, trebuie si stangul... folosim for?
         return checkIfEqual(toCheckFor1, toCheckFor2) && checkIfEqual(toCheckFor1, toCheckFor2);
     }
 
@@ -85,5 +84,19 @@ public class Tree<T> {
 
     private boolean differentNumberOfSubTrees(List<Node<T>> toCheckFor1, List<Node<T>> toCheckFor2) {
         return toCheckFor1.size() != toCheckFor2.size();
+    }
+
+    public int getHeight() {
+        return getHeight(root);
+    }
+
+    private int getHeight(Node<T> node) {
+        if (node == null || (node.getLeft() == null && node.getRight() == null)) {
+            return 0;
+        }
+        int leftDepth = getHeight(node.getLeft()) + 1;
+        int rightDepth = getHeight(node.getRight()) + 1;
+
+        return Collections.max(Arrays.asList(leftDepth, rightDepth));
     }
 }

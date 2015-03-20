@@ -45,6 +45,7 @@ public class WmwPerformanceCalculator implements PerformanceCalculator {
 
     @Override
     public boolean hasBetterPerformance(double performance1, double performance2) {
+        //TODO check if we can use this and get rid of Objective class?
         return FitnessHelper.fitnessHasBiggerValue(performance1, performance2);
     }
 }
