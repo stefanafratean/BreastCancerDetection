@@ -1,6 +1,6 @@
 package fitness;
 
-import learning.ChromosomeOperator;
+import learning.ChromosomeOutputComputer;
 import model.Chromosome;
 import model.ConfusionValuesWrapper;
 import model.Radiography;
@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class AccPerformanceCalculator implements PerformanceCalculator {
 
-    private ChromosomeOperator chromosomeOperator;
+    private ChromosomeOutputComputer outputComputer;
 
-    public AccPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
-        this.chromosomeOperator = chromosomeOperator;
+    public AccPerformanceCalculator(ChromosomeOutputComputer outputComputer) {
+        this.outputComputer = outputComputer;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class AccPerformanceCalculator implements PerformanceCalculator {
                                             List<Radiography> radiographies) {
         ConfusionValuesWrapper confusionValues = new ConfusionValuesWrapper();
         for (Radiography r : radiographies) {
-            double chromosomeOutput = chromosomeOperator.getOutputValue(
+            double chromosomeOutput = outputComputer.getOutputValue(
                     chromosome, r);
             predictValue(confusionValues,
                     FitnessHelper.itHasCancer(chromosomeOutput),

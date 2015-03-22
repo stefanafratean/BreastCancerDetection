@@ -2,12 +2,8 @@ package learning;
 
 import fitness.PerformanceCalculator;
 import model.Chromosome;
-import model.Radiography;
-import model.functions.Function;
 import model.functions.FunctionHelper;
-import model.functions.TwoArgumentsFunction;
 import model.performancemeasure.PerformanceMeasure;
-import util.MathUtil;
 import util.Node;
 import util.Tree;
 
@@ -20,29 +16,22 @@ import static model.functions.FunctionHelper.generateFunction;
 public class ChromosomeOperator {
     private boolean switchFlag;
     private TerminalOperator terminalOperator;
-    public final int MAX_CHROMOSOME_DEPTH;
+    private final int MAX_CHROMOSOME_DEPTH;
+    private List<PerformanceCalculator> calculators;
 
-    public ChromosomeOperator(TerminalOperator terminalOperator) {
+    public ChromosomeOperator(TerminalOperator terminalOperator, List<PerformanceCalculator> calculators) {
         this.terminalOperator = terminalOperator;
+        this.calculators = calculators;
         MAX_CHROMOSOME_DEPTH = (int) (Math.round(Math
                 .log(terminalOperator.getNumberOfTerminals()) / Math.log(2)));
     }
 
-    public Chromosome xo(List<PerformanceCalculator> calculators, Chromosome mother, Chromosome father, Random r) {
+    public Chromosome xo(Chromosome mother, Chromosome father, Random r) {
 
         Node<Integer> node = setFlagAndBuildChild(mother, father, r);
         Tree<Integer> tree = new Tree<Integer>(node);
 
-        return new Chromosome(tree, getNewPerformanceMeasures(calculators));
-    }
-
-    private List<PerformanceMeasure> getNewPerformanceMeasures(List<PerformanceCalculator> calculators) {
-        List<PerformanceMeasure> performanceMeasures = new ArrayList<PerformanceMeasure>();
-        for (PerformanceCalculator calculator : calculators) {
-            PerformanceMeasure measure = new PerformanceMeasure(calculator, 0);
-            performanceMeasures.add(measure);
-        }
-        return performanceMeasures;
+        return new Chromosome(tree, getNewPerformanceMeasures());
     }
 
     public Chromosome mutation(Chromosome chromosome, Random r) {
@@ -60,18 +49,26 @@ public class ChromosomeOperator {
      * Creates and initializes a chromosome using the method full or using the
      * method grow, depending on the value of the isFull parameter.
      *
-     * @param maxDepth represents the maximum allowed depth of the chromosome
-     * @param r        random number used to choose terminals and functions
-     * @param isFull   should be set to true if we want the chromosome to be
-     *                 initializes with the full method, false if we want it to be
-     *                 initialized with the grow method.
+     * @param r      random number used to choose terminals and functions
+     * @param isFull should be set to true if we want the chromosome to be
+     *               initializes with the full method, false if we want it to be
+     *               initialized with the grow method.
      * @return
      */
-    public Chromosome createChromosome(List<PerformanceCalculator> calculators, int maxDepth, Random r,
+    public Chromosome createChromosome(Random r,
                                        boolean isFull) {
-        Chromosome chromosome = new Chromosome(r, getNewPerformanceMeasures(calculators));
-        initChromosome(maxDepth, 0, r, chromosome.getRootNode(), isFull);
+        Chromosome chromosome = new Chromosome(r, getNewPerformanceMeasures());
+        initChromosome(MAX_CHROMOSOME_DEPTH, 0, r, chromosome.getRootNode(), isFull);
         return chromosome;
+    }
+
+    private List<PerformanceMeasure> getNewPerformanceMeasures() {
+        List<PerformanceMeasure> performanceMeasures = new ArrayList<PerformanceMeasure>();
+        for (PerformanceCalculator calculator : calculators) {
+            PerformanceMeasure measure = new PerformanceMeasure(calculator, 0);
+            performanceMeasures.add(measure);
+        }
+        return performanceMeasures;
     }
 
     private void initChromosome(int maxDepth, int currentDepth,
@@ -107,31 +104,6 @@ public class ChromosomeOperator {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Returns a number that is the result of the discriminant function
-     * represented by the chromosome
-     */
-    public double getOutputValue(Chromosome chromosome,
-                                 Radiography radiography) {
-        double rawValue = getOutputValue(chromosome.getRepresentation().getRoot(),
-                radiography);
-//        return MathUtil.sigmoid(rawValue);
-        return rawValue;
-    }
-
-    private double getOutputValue(Node<Integer> node,
-                                  Radiography radiography) {
-        if (!FunctionHelper.nodeIsFunction(node)) {
-            return terminalOperator.getMappedValue(radiography, node.getData());
-        } else {
-            Function f = FunctionHelper.getFunction(node.getData());
-
-            double leftSideResult = getOutputValue(node.getLeft(), radiography);
-            double rightSideResult = getOutputValue(node.getRight(), radiography);
-            return ((TwoArgumentsFunction) f).compute(leftSideResult, rightSideResult);
-        }
     }
 
     private int getDifferentTerminal(int current, Random r) {

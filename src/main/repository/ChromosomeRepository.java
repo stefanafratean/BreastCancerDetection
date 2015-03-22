@@ -1,13 +1,14 @@
 package repository;
 
-import fitness.PerformanceCalculator;
-import learning.ChromosomeOperator;
 import model.Chromosome;
 import model.Radiography;
 import model.objective.Objective;
 import model.performancemeasure.PerformanceMeasure;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public class ChromosomeRepository {
     public static final int POPULATION_NUMBER = 100;
@@ -15,23 +16,10 @@ public class ChromosomeRepository {
     private static final int TOURNAMENT_NUMBER = 20;
     private final List<Chromosome> population;
     private final Random r;
-    private final List<PerformanceCalculator> calculators;
 
-    public ChromosomeRepository(List<PerformanceCalculator> calculators, Random r, ChromosomeOperator chromosomeOperator) {
+    public ChromosomeRepository(PopulationBuilder builder, Random r) {
+        population = builder.createInitialPopulation(POPULATION_NUMBER);
         this.r = r;
-        this.calculators = calculators;
-        population = new ArrayList<Chromosome>();
-        initPopulation(chromosomeOperator);
-    }
-
-    // initialize population with the method ramped half-half
-    private void initPopulation(ChromosomeOperator chromosomeOperator) {
-        for (int i = 0; i < POPULATION_NUMBER / 2; i++) {
-            population.add(chromosomeOperator.createChromosome(calculators,
-                    chromosomeOperator.MAX_CHROMOSOME_DEPTH, r, false));
-            population.add(chromosomeOperator.createChromosome(calculators,
-                    chromosomeOperator.MAX_CHROMOSOME_DEPTH, r, true));
-        }
     }
 
     /**
@@ -198,9 +186,8 @@ public class ChromosomeRepository {
         }
     }
 
-    public void sort() {
-        //TODO remove this and use the parametrized one
-        Collections.sort(population, new CrowdingDistanceAwareComparator(population));
+    private void sort() {
+        (new ChromosomesSorter()).sort(population);
     }
 
     private boolean equalFitnessInLessCrowdedArea(int i, int j) {

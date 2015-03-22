@@ -1,6 +1,6 @@
 package fitness;
 
-import learning.ChromosomeOperator;
+import learning.ChromosomeOutputComputer;
 import model.AucValuesWrapper;
 import model.Chromosome;
 import model.Radiography;
@@ -11,10 +11,10 @@ import java.util.List;
 
 public class AucPerformanceCalculator implements PerformanceCalculator {
 
-    private ChromosomeOperator chromosomeOperator;
+    private ChromosomeOutputComputer outputComputer;
 
-    public AucPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
-        this.chromosomeOperator = chromosomeOperator;
+    public AucPerformanceCalculator(ChromosomeOutputComputer outputComputer) {
+        this.outputComputer = outputComputer;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AucPerformanceCalculator implements PerformanceCalculator {
     private void computeOutputs(Chromosome chromosome,
                                 List<Radiography> radiographies, AucValuesWrapper aucValues) {
         for (Radiography r : radiographies) {
-            double output = chromosomeOperator.getOutputValue(chromosome, r);
+            double output = outputComputer.getOutputValue(chromosome, r);
             if (r.isWithCancer()) {
                 aucValues.addCancerOutput(output);
             } else {

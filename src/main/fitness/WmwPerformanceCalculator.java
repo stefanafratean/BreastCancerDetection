@@ -1,6 +1,6 @@
 package fitness;
 
-import learning.ChromosomeOperator;
+import learning.ChromosomeOutputComputer;
 import model.Chromosome;
 import model.Radiography;
 import repository.FitnessHelper;
@@ -10,10 +10,10 @@ import java.util.List;
 
 public class WmwPerformanceCalculator implements PerformanceCalculator {
 
-    private ChromosomeOperator chromosomeOperator;
+    private ChromosomeOutputComputer outputComputer;
 
-    public WmwPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
-        this.chromosomeOperator = chromosomeOperator;
+    public WmwPerformanceCalculator(ChromosomeOutputComputer outputComputer) {
+        this.outputComputer = outputComputer;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class WmwPerformanceCalculator implements PerformanceCalculator {
         List<Double> negativeClassOutputs = new ArrayList<Double>();
 
         for (Radiography rad : radiographies) {
-            double output = chromosomeOperator.getOutputValue(chromosome, rad);
+            double output = outputComputer.getOutputValue(chromosome, rad);
             if (rad.isWithCancer()) {
                 positiveClassOutputs.add(output);
             } else {

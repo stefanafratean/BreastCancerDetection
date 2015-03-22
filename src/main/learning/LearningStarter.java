@@ -1,33 +1,35 @@
 package learning;
 
-import fitness.HeightPerformanceCalculator;
+import fitness.AccPerformanceCalculator;
 import fitness.PerformanceCalculator;
 import fitness.WmwPerformanceCalculator;
 import model.Chromosome;
 import model.Radiography;
 import repository.ChromosomeRepository;
+import repository.FitnessHelper;
+import repository.PopulationBuilder;
 import repository.RadiographyRepository;
+import repository.extractors.ExtractorsAggregator;
 import results.ResultsProcessor;
 import results.WrongEntry;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class LearningStarter {
     private RadiographyRepository radiographyRepository;
-    private ChromosomeOperator chromosomeOperator;
+    private TerminalOperator terminalOperator;
+    private ChromosomeOutputComputer outputComputer;
 
-    public LearningStarter(RadiographyRepository radiographyRepository, ChromosomeOperator chromosomeOperator) {
+    public LearningStarter(RadiographyRepository radiographyRepository, ExtractorsAggregator extractors) {
         this.radiographyRepository = radiographyRepository;
-        this.chromosomeOperator = chromosomeOperator;
+        terminalOperator = new TerminalOperator(extractors);
+        outputComputer = new ChromosomeOutputComputer(terminalOperator);
     }
 
     public void startLearning() {
         Random r = new Random();
-        List<PerformanceCalculator> calculators = getPerformanceCalculators();
 
+        List<PerformanceCalculator> calculators = getPerformanceCalculators();
         int radiographyNb = radiographyRepository.getRadiographyNb();
         int cancerNb = radiographyRepository.getCancerRadNb();
         int iterations = 10;
@@ -43,15 +45,15 @@ public class LearningStarter {
     }
 
     private List<PerformanceCalculator> getPerformanceCalculators() {
-        PerformanceCalculator wmwPerformanceCalculator = new WmwPerformanceCalculator(chromosomeOperator);
-//        PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(chromosomeOperator);
-        PerformanceCalculator heightPerformanceCalculator = new HeightPerformanceCalculator();
-//        return Arrays.asList(wmwPerformanceCalculator, accPerformanceCalculator);
-        List<PerformanceCalculator> list = new ArrayList<PerformanceCalculator>();
-        list.add(wmwPerformanceCalculator);
-        list.add(heightPerformanceCalculator);
+        PerformanceCalculator wmwPerformanceCalculator = new WmwPerformanceCalculator(outputComputer);
+        PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(outputComputer);
+//        PerformanceCalculator heightPerformanceCalculator = new HeightPerformanceCalculator();
+        return Arrays.asList(wmwPerformanceCalculator, accPerformanceCalculator);
+//        List<PerformanceCalculator> list = new ArrayList<PerformanceCalculator>();
+//        list.add(wmwPerformanceCalculator);
+//        list.add(heightPerformanceCalculator);
 
-        return list;
+//        return list;
     }
 
     private WrongEntry performCrossExperiment(Random r, List<PerformanceCalculator> calculators) {
@@ -69,8 +71,9 @@ public class LearningStarter {
     }
 
     private WrongEntry performSubFold(Random r, List<PerformanceCalculator> calculators) {
-
-        ChromosomeRepository chromosomeRepository = new ChromosomeRepository(calculators, r, chromosomeOperator);
+        ChromosomeOperator chromosomeOperator = new ChromosomeOperator(terminalOperator, calculators);
+        PopulationBuilder builder = new PopulationBuilder(chromosomeOperator, r);
+        ChromosomeRepository chromosomeRepository = new ChromosomeRepository(builder, r);
         Learner learner = new Learner(calculators, chromosomeRepository,
                 radiographyRepository, chromosomeOperator, r);
 
@@ -94,7 +97,7 @@ public class LearningStarter {
                 if (!rad.isWithCancer()) {
                     negativeClassSizes.set(i, negativeClassSizes.get(i) + 1);
                 }
-                outputForCurrentChr.add(chromosomeOperator.getOutputValue(paretoFrontChromosomes.get(i), rad));
+                outputForCurrentChr.add(outputComputer.getOutputValue(paretoFrontChromosomes.get(i), rad));
             }
             Collections.sort(outputForCurrentChr);
             outputs.add(outputForCurrentChr);
@@ -108,7 +111,7 @@ public class LearningStarter {
             double cancerCount = 0d;
             double normalCount = 0d;
             for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
-                double outputForCurrentChr = chromosomeOperator.getOutputValue(paretoFrontChromosomes.get(i), r);
+                double outputForCurrentChr = outputComputer.getOutputValue(paretoFrontChromosomes.get(i), r);
                 //wmw decision
                 ArrayList<Double> outputsForCurrentChr = outputs.get(i);
                 Integer negativeClassSizeForCurrentChr = negativeClassSizes.get(i);
@@ -120,12 +123,12 @@ public class LearningStarter {
                 }
 
                 //acc decision
-//                double accWeight = paretoFrontChromosomes.get(i).getPerformanceMeasures().get(1).getValue();
-//                if (FitnessHelper.itHasCancer(outputForCurrentChr)) {
-//                    cancerCount++;
-//                } else {
-//                    normalCount++;
-//                }
+                double accWeight = paretoFrontChromosomes.get(i).getPerformanceMeasures().get(1).getValue();
+                if (FitnessHelper.itHasCancer(outputForCurrentChr)) {
+                    cancerCount++;
+                } else {
+                    normalCount++;
+                }
             }
             if (cancerCount >= normalCount) {
                 withCancer = true;

@@ -1,6 +1,6 @@
 package fitness;
 
-import learning.ChromosomeOperator;
+import learning.ChromosomeOutputComputer;
 import model.Chromosome;
 import model.Radiography;
 import repository.FitnessHelper;
@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class WrongDecisionsPerformanceCalculator implements PerformanceCalculator {
 
-    private ChromosomeOperator chromosomeOperator;
+    private ChromosomeOutputComputer outputComputer;
 
-    public WrongDecisionsPerformanceCalculator(ChromosomeOperator chromosomeOperator) {
-        this.chromosomeOperator = chromosomeOperator;
+    public WrongDecisionsPerformanceCalculator(ChromosomeOutputComputer outputComputer) {
+        this.outputComputer = outputComputer;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class WrongDecisionsPerformanceCalculator implements PerformanceCalculato
                                             List<Radiography> radiographies) {
         double fitness = 0;
         for (Radiography r : radiographies) {
-            double chromosomeOutput = chromosomeOperator.getOutputValue(
+            double chromosomeOutput = outputComputer.getOutputValue(
                     chromosome, r);
             if (madeWrongDecision(r, chromosomeOutput)) {
                 fitness++;

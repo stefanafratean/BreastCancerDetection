@@ -24,8 +24,7 @@ public class ConsoleInterface {
         ExtractorsAggregator extractors = readExtractors(file);
 
         RadiographyRepository radiographyRepository = new RadiographyRepository(extractors, file);
-        ChromosomeOperator chromosomeOperator = new ChromosomeOperator(new TerminalOperator(extractors));
-        LearningStarter learningStarter = new LearningStarter(radiographyRepository, chromosomeOperator);
+        LearningStarter learningStarter = new LearningStarter(radiographyRepository, extractors);
         learningStarter.startLearning();
     }
 
