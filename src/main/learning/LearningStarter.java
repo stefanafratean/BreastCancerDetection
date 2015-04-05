@@ -1,8 +1,11 @@
 package learning;
 
 import fitness.AccPerformanceCalculator;
+import fitness.HeightPerformanceCalculator;
 import fitness.PerformanceCalculator;
 import fitness.WmwPerformanceCalculator;
+import learning.ensembleclassifiers.EnsembleClassifier;
+import learning.ensembleclassifiers.VoteEnsembleClassifier;
 import model.Chromosome;
 import model.Radiography;
 import repository.ChromosomeRepository;
@@ -47,13 +50,13 @@ public class LearningStarter {
     private List<PerformanceCalculator> getPerformanceCalculators() {
         PerformanceCalculator wmwPerformanceCalculator = new WmwPerformanceCalculator(outputComputer);
         PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(outputComputer);
-//        PerformanceCalculator heightPerformanceCalculator = new HeightPerformanceCalculator();
-        return Arrays.asList(wmwPerformanceCalculator, accPerformanceCalculator);
-//        List<PerformanceCalculator> list = new ArrayList<PerformanceCalculator>();
-//        list.add(wmwPerformanceCalculator);
-//        list.add(heightPerformanceCalculator);
+        PerformanceCalculator heightPerformanceCalculator = new HeightPerformanceCalculator();
+//        return Arrays.asList(wmwPerformanceCalculator, accPerformanceCalculator);
+        List<PerformanceCalculator> list = new ArrayList<PerformanceCalculator>();
+        list.add(wmwPerformanceCalculator);
+        list.add(heightPerformanceCalculator);
 
-//        return list;
+        return list;
     }
 
     private WrongEntry performCrossExperiment(Random r, List<PerformanceCalculator> calculators) {
@@ -77,73 +80,11 @@ public class LearningStarter {
         Learner learner = new Learner(calculators, chromosomeRepository,
                 radiographyRepository, chromosomeOperator, r);
 
-        // CV evaluation part 2
         List<Chromosome> paretoFront = learner.findParetoFront();
+        EnsembleClassifier ensembleClassifier = new VoteEnsembleClassifier(radiographyRepository, outputComputer);
 
-        WrongEntry wrongEntry = classifyForEachObjective(paretoFront);
+        WrongEntry wrongEntry = ensembleClassifier.classify(paretoFront);
         return wrongEntry;
     }
 
-    //TODO take into account all performance measures for the classification
-    private WrongEntry classifyForEachObjective(List<Chromosome> paretoFrontChromosomes) {
-        List<Integer> negativeClassSizes = new ArrayList<Integer>();
-        for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
-            negativeClassSizes.add(0);
-        }
-        ArrayList<ArrayList<Double>> outputs = new ArrayList<ArrayList<Double>>();
-        for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
-            ArrayList<Double> outputForCurrentChr = new ArrayList<Double>();
-            for (Radiography rad : radiographyRepository.getTrainRadiographies()) {
-                if (!rad.isWithCancer()) {
-                    negativeClassSizes.set(i, negativeClassSizes.get(i) + 1);
-                }
-                outputForCurrentChr.add(outputComputer.getOutputValue(paretoFrontChromosomes.get(i), rad));
-            }
-            Collections.sort(outputForCurrentChr);
-            outputs.add(outputForCurrentChr);
-        }
-
-        int wrongCancer = 0;
-        int wrongNormal = 0;
-        // rad startLearning
-        for (Radiography r : radiographyRepository.getTestRadiographies()) {
-            boolean withCancer = false;
-            double cancerCount = 0d;
-            double normalCount = 0d;
-            for (int i = 0; i < paretoFrontChromosomes.size(); i++) {
-                double outputForCurrentChr = outputComputer.getOutputValue(paretoFrontChromosomes.get(i), r);
-                //wmw decision
-                ArrayList<Double> outputsForCurrentChr = outputs.get(i);
-                Integer negativeClassSizeForCurrentChr = negativeClassSizes.get(i);
-                double wmwWeight = paretoFrontChromosomes.get(i).getPerformanceMeasures().get(0).getValue();
-                if (outputForCurrentChr > outputsForCurrentChr.get(negativeClassSizeForCurrentChr)) {
-                    cancerCount++;
-                } else {
-                    normalCount++;
-                }
-
-                //acc decision
-                double accWeight = paretoFrontChromosomes.get(i).getPerformanceMeasures().get(1).getValue();
-                if (FitnessHelper.itHasCancer(outputForCurrentChr)) {
-                    cancerCount++;
-                } else {
-                    normalCount++;
-                }
-            }
-            if (cancerCount >= normalCount) {
-                withCancer = true;
-            }
-            if (withCancer != r.isWithCancer()) {
-                if (withCancer) {
-                    wrongCancer++;
-                } else {
-                    wrongNormal++;
-                }
-            }
-        }
-
-        WrongEntry wrongs = new WrongEntry(wrongCancer, wrongNormal);
-
-        return wrongs;
-    }
 }

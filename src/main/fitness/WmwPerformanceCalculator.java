@@ -34,7 +34,7 @@ public class WmwPerformanceCalculator implements PerformanceCalculator {
         double sum = 0;
         for (Double positiveClassOutput : positiveClassOutputs) {
             for (Double negativeClassOutput : negativeClassOutputs) {
-                if (positiveClassOutput > 0.5 && positiveClassOutput > negativeClassOutput) {
+                if (positiveClassOutput > 0 && positiveClassOutput > negativeClassOutput) {
                     sum++;
                 }
             }

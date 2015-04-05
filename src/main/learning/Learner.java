@@ -30,8 +30,8 @@ class Learner {
         this.chromosomeOperator = chromosomeOperator;
         objectives = new ArrayList<Objective>();
         objectives.add(new WmwObjective());
-//        objectives.add(new HeightObjective());
-        objectives.add(new AccObjective());
+        objectives.add(new HeightObjective());
+//        objectives.add(new AccObjective());
 //        objectives = Arrays.asList(new WmwObjective(), new AccObjective(), new HeightObjective());
         this.calculators = calculators;
         this.r = r;
