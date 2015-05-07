@@ -13,8 +13,13 @@ public class TerminalOperator {
             8, 9, -1, -2, -3, -4, -5, -6, -7, -8, -9);
     private int numberOfTerminals;
 
+    //TODO this should be removed => we can just give this number as a parameter
     public TerminalOperator(ExtractorsAggregator extractors) {
         computeNumberOfTerminals(extractors);
+    }
+
+    public TerminalOperator(int numberOfTerminals) {
+        this.numberOfTerminals = numberOfTerminals;
     }
 
     private void computeNumberOfTerminals(ExtractorsAggregator extractors) {
@@ -63,7 +68,8 @@ public class TerminalOperator {
             d = constants.get(index - cumulatedSize);
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            System.err.println("TerminalOperator: " + e.getMessage());
+            e.printStackTrace();
         }
         return d;
     }

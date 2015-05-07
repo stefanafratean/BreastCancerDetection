@@ -21,6 +21,10 @@ public class RadiographyRepository {
         subsetsList = initializeSubsetsList(radiographyList);
     }
 
+    public RadiographyRepository(List<Radiography> radiographyList) {
+        subsetsList = initializeSubsetsList(radiographyList);
+    }
+
     private List<ArrayList<Radiography>> initializeSubsetsList(List<Radiography> radiographyList) {
         int subsetsNo = 10;
 

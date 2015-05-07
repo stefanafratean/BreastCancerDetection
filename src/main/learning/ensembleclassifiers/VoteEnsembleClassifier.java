@@ -4,46 +4,26 @@ import learning.ChromosomeOutputComputer;
 import model.Chromosome;
 import model.Radiography;
 import repository.RadiographyRepository;
-import results.WrongEntry;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class VoteEnsembleClassifier implements EnsembleClassifier {
-    private RadiographyRepository radiographyRepository;
+public class VoteEnsembleClassifier extends EnsembleClassifier {
     private ChromosomeOutputComputer outputComputer;
 
     public VoteEnsembleClassifier(RadiographyRepository radiographyRepository, ChromosomeOutputComputer outputComputer) {
-        this.radiographyRepository = radiographyRepository;
+        super.radiographyRepository = radiographyRepository;
         this.outputComputer = outputComputer;
     }
 
     @Override
-    public WrongEntry classify(List<Chromosome> paretoFrontChromosomes) {
-        int negativeClassSize = getNegativeClassSize();
-
-        int wrongCancer = 0;
-        int wrongNormal = 0;
-
-        for (Radiography r : radiographyRepository.getTestRadiographies()) {
-
-            boolean withCancer = getParetoDecision(paretoFrontChromosomes, negativeClassSize, r);
-
-            if (withCancer != r.isWithCancer()) {
-                if (withCancer) {
-                    wrongCancer++;
-                } else {
-                    wrongNormal++;
-                }
-            }
-        }
-
-        return new WrongEntry(wrongCancer, wrongNormal);
+    protected void performExtraTraining(List<Chromosome> paretoFrontChromosomes, int negativeClassSize) {
+        // no extra training in this case
     }
 
-
-    private boolean getParetoDecision(List<Chromosome> paretoFrontChromosomes, int negativeClassSize, Radiography radiography) {
+    @Override
+    protected boolean getParetoDecision(List<Chromosome> paretoFrontChromosomes, int negativeClassSize, Radiography radiography) {
         //TODO this method should globally take into account all objectives, using strategy pattern
 
         int cancerCount = 0;
@@ -76,13 +56,4 @@ public class VoteEnsembleClassifier implements EnsembleClassifier {
         return outputs;
     }
 
-    private int getNegativeClassSize() {
-        int negativeClassSize = 0;
-        for (Radiography rad : radiographyRepository.getTrainRadiographies()) {
-            if (!rad.isWithCancer()) {
-                negativeClassSize++;
-            }
-        }
-        return negativeClassSize;
-    }
 }

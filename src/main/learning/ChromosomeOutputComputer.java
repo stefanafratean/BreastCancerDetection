@@ -4,14 +4,17 @@ import model.Chromosome;
 import model.Radiography;
 import model.functions.Function;
 import model.functions.FunctionHelper;
+import model.functions.ThreeArgumentsFunction;
 import model.functions.TwoArgumentsFunction;
 import util.Node;
 
 public class ChromosomeOutputComputer {
     private TerminalOperator terminalOperator;
+    private FunctionHelper functionHelper;
 
-    public ChromosomeOutputComputer(TerminalOperator terminalOperator) {
+    public ChromosomeOutputComputer(TerminalOperator terminalOperator, FunctionHelper functionHelper) {
         this.terminalOperator = terminalOperator;
+        this.functionHelper = functionHelper;
     }
 
     /**
@@ -28,14 +31,21 @@ public class ChromosomeOutputComputer {
 
     private double getOutputValue(Node<Integer> node,
                                   Radiography radiography) {
-        if (!FunctionHelper.nodeIsFunction(node)) {
+        if (!functionHelper.nodeIsFunction(node)) {
             return terminalOperator.getMappedValue(radiography, node.getData());
         } else {
-            Function f = FunctionHelper.getFunction(node.getData());
+            Function f = functionHelper.getFunction(node.getData());
 
             double leftSideResult = getOutputValue(node.getLeft(), radiography);
             double rightSideResult = getOutputValue(node.getRight(), radiography);
-            return ((TwoArgumentsFunction) f).compute(leftSideResult, rightSideResult);
+
+            if (f instanceof TwoArgumentsFunction) {
+                return ((TwoArgumentsFunction) f).compute(leftSideResult, rightSideResult);
+            } else {
+                // three arguments function
+                double middleSideResult = getOutputValue(node.getMiddle(), radiography);
+                return ((ThreeArgumentsFunction) f).compute(leftSideResult, middleSideResult, rightSideResult);
+            }
         }
     }
 }

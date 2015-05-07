@@ -2,7 +2,9 @@ package learning;
 
 import fitness.PerformanceCalculator;
 import model.Chromosome;
+import model.functions.Function;
 import model.functions.FunctionHelper;
+import model.functions.ThreeArgumentsFunction;
 import model.performancemeasure.PerformanceMeasure;
 import util.Node;
 import util.Tree;
@@ -11,19 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static model.functions.FunctionHelper.generateFunction;
 
 public class ChromosomeOperator {
     private boolean switchFlag;
     private TerminalOperator terminalOperator;
     private final int MAX_CHROMOSOME_DEPTH;
     private List<PerformanceCalculator> calculators;
+    private FunctionHelper functionHelper;
 
-    public ChromosomeOperator(TerminalOperator terminalOperator, List<PerformanceCalculator> calculators) {
+    public ChromosomeOperator(TerminalOperator terminalOperator, FunctionHelper functionHelper, List<PerformanceCalculator> calculators) {
         this.terminalOperator = terminalOperator;
         this.calculators = calculators;
-        MAX_CHROMOSOME_DEPTH = (int) (Math.round(Math
-                .log(terminalOperator.getNumberOfTerminals()) / Math.log(2)));
+        MAX_CHROMOSOME_DEPTH = Math.max(3, (int) (Math.round(Math
+                .log(terminalOperator.getNumberOfTerminals()) / Math.log(2))));
+        this.functionHelper = functionHelper;
     }
 
     public Chromosome xo(Chromosome mother, Chromosome father, Random r) {
@@ -37,11 +40,13 @@ public class ChromosomeOperator {
     public Chromosome mutation(Chromosome chromosome, Random r) {
         Node<Integer> node = getRandomNode(chromosome.getRepresentation()
                 .getRoot(), r);
-        if (FunctionHelper.nodeIsFunction(node)) {
+
+        if (functionHelper.nodeIsFunction(node)) {
             node.setData(getDifferentFunction(node.getData(), r));
         } else {
             node.setData(getDifferentTerminal(node.getData(), r));
         }
+
         return chromosome;
     }
 
@@ -57,7 +62,7 @@ public class ChromosomeOperator {
      */
     public Chromosome createChromosome(Random r,
                                        boolean isFull) {
-        Chromosome chromosome = new Chromosome(r, getNewPerformanceMeasures());
+        Chromosome chromosome = new Chromosome(functionHelper.generateFunction(r), getNewPerformanceMeasures());
         initChromosome(MAX_CHROMOSOME_DEPTH, 0, r, chromosome.getRootNode(), isFull);
         return chromosome;
     }
@@ -75,9 +80,13 @@ public class ChromosomeOperator {
                                 Random r, Node<Integer> currentNode, boolean isFull) {
 
         if (addTerminalAndCheckIfFull(maxDepth, currentDepth, r, currentNode, isFull)) return;
-        addFunction(r, currentNode);
+        Function f = addFunction(r, currentNode);
         initializeLeft(maxDepth, currentDepth, r, currentNode, isFull);
         initializeRight(maxDepth, currentDepth, r, currentNode, isFull);
+
+        if (f instanceof ThreeArgumentsFunction){
+            initializeMiddle(maxDepth, currentDepth, r, currentNode, isFull);
+        }
     }
 
     private void initializeRight(int maxDepth, int currentDepth, Random r, Node<Integer> currentNode, boolean isFull) {
@@ -94,8 +103,18 @@ public class ChromosomeOperator {
         initChromosome(maxDepth, currentDepth + 1, r, leftNode, isFull);
     }
 
-    private void addFunction(Random r, Node<Integer> currentNode) {
-        currentNode.setData(generateFunction(r));
+    private void initializeMiddle(int maxDepth, int currentDepth, Random r, Node<Integer> currentNode, boolean isFull) {
+        Node<Integer> middleNode = new Node<Integer>();
+        currentNode.setMiddle(middleNode);
+        middleNode.setParent(currentNode);
+        initChromosome(maxDepth, currentDepth + 1, r, middleNode, isFull);
+    }
+
+    private Function addFunction(Random r, Node<Integer> currentNode) {
+        int function = functionHelper.generateFunction(r);
+        currentNode.setData(function);
+
+        return functionHelper.getFunction(function);
     }
 
     private boolean addTerminalAndCheckIfFull(int maxDepth, int currentDepth, Random r, Node<Integer> currentNode, boolean isFull) {
@@ -110,7 +129,7 @@ public class ChromosomeOperator {
         int newTerminal;
         while (true) {
             newTerminal = terminalOperator.generateTerminal(r);
-            if (current != newTerminal) {
+            if (current != newTerminal || terminalOperator.getNumberOfTerminals() == 1) {
                 return newTerminal;
             }
         }
@@ -119,7 +138,7 @@ public class ChromosomeOperator {
     private int getDifferentFunction(int current, Random r) {
         int newTerminal;
         while (true) {
-            newTerminal = FunctionHelper.generateFunction(r);
+            newTerminal = functionHelper.generateFunction(r);
             if (current != newTerminal) {
                 return newTerminal;
             }
@@ -143,6 +162,7 @@ public class ChromosomeOperator {
             if (maxAllowedDepthAndFunction(parentNode1, currentDepth)) {
                 childNode.setData(terminalOperator.generateTerminal(r));
                 childNode.setLeft(null);
+                childNode.setMiddle(null);
                 childNode.setRight(null);
                 return childNode;
             }
@@ -154,12 +174,15 @@ public class ChromosomeOperator {
                         parentNode2, r, currentDepth + 1));
                 childNode.setRight(buildChild(parentNode1.getRight(),
                         parentNode2, r, currentDepth + 1));
+                childNode.setMiddle(buildChild(parentNode1.getMiddle(),
+                        parentNode2, r, currentDepth + 1));
                 //	}
             } else {
                 Node<Integer> nodeFromOtherParent = buildChild(getRandomNode(parentNode2, r),
                         null, r, currentDepth + 1);
                 childNode.setData(nodeFromOtherParent.getData());
                 childNode.setLeft(nodeFromOtherParent.getLeft());
+                childNode.setMiddle(nodeFromOtherParent.getMiddle());
                 childNode.setRight(nodeFromOtherParent.getRight());
             }
             return childNode;
@@ -172,7 +195,7 @@ public class ChromosomeOperator {
     private boolean maxAllowedDepthAndFunction(
             Node<Integer> parentNode1, int currentDepth) {
         return currentDepth == MAX_CHROMOSOME_DEPTH
-                && FunctionHelper.nodeIsFunction(parentNode1);
+                && functionHelper.nodeIsFunction(parentNode1);
     }
 
     /*

@@ -58,9 +58,11 @@ public class Tree<T> {
         }
 
         toCheckFor1.add(0, node1.getLeft());
+        toCheckFor1.add(0, node1.getMiddle());
         toCheckFor1.add(0, node1.getRight());
 
         toCheckFor2.add(0, node2.getLeft());
+        toCheckFor2.add(0, node2.getMiddle());
         toCheckFor2.add(0, node2.getRight());
 
         return checkIfEqual(toCheckFor1, toCheckFor2) && checkIfEqual(toCheckFor1, toCheckFor2);
@@ -91,12 +93,13 @@ public class Tree<T> {
     }
 
     private int getHeight(Node<T> node) {
-        if (node == null || (node.getLeft() == null && node.getRight() == null)) {
+        if (node == null || (node.getLeft() == null && node.getMiddle() == null && node.getRight() == null)) {
             return 0;
         }
         int leftDepth = getHeight(node.getLeft()) + 1;
+        int middleDepth = getHeight(node.getMiddle()) + 1;
         int rightDepth = getHeight(node.getRight()) + 1;
 
-        return Collections.max(Arrays.asList(leftDepth, rightDepth));
+        return Collections.max(Arrays.asList(leftDepth, middleDepth, rightDepth));
     }
 }

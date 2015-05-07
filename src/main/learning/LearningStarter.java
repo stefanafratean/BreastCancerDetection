@@ -1,32 +1,40 @@
 package learning;
 
-import fitness.AccPerformanceCalculator;
 import fitness.HeightPerformanceCalculator;
 import fitness.PerformanceCalculator;
 import fitness.WmwPerformanceCalculator;
+import learning.ensembleclassifiers.CompositeEnsembleClassifier;
 import learning.ensembleclassifiers.EnsembleClassifier;
 import learning.ensembleclassifiers.VoteEnsembleClassifier;
 import model.Chromosome;
-import model.Radiography;
+import model.functions.*;
+import model.objective.HeightObjective;
+import model.objective.Objective;
+import model.objective.WmwObjective;
 import repository.ChromosomeRepository;
-import repository.FitnessHelper;
 import repository.PopulationBuilder;
 import repository.RadiographyRepository;
 import repository.extractors.ExtractorsAggregator;
 import results.ResultsProcessor;
 import results.WrongEntry;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class LearningStarter {
     private RadiographyRepository radiographyRepository;
     private TerminalOperator terminalOperator;
     private ChromosomeOutputComputer outputComputer;
+    private FunctionHelper functionsForRads;
 
     public LearningStarter(RadiographyRepository radiographyRepository, ExtractorsAggregator extractors) {
         this.radiographyRepository = radiographyRepository;
         terminalOperator = new TerminalOperator(extractors);
-        outputComputer = new ChromosomeOutputComputer(terminalOperator);
+        functionsForRads = new FunctionHelper(Arrays.<Function>asList(new Plus(), new Minus(),
+                new Multiplier(), new SafeDivision()));
+        outputComputer = new ChromosomeOutputComputer(terminalOperator, functionsForRads);
     }
 
     public void startLearning() {
@@ -49,11 +57,11 @@ public class LearningStarter {
 
     private List<PerformanceCalculator> getPerformanceCalculators() {
         PerformanceCalculator wmwPerformanceCalculator = new WmwPerformanceCalculator(outputComputer);
-        PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(outputComputer);
+//        PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(outputComputer);
         PerformanceCalculator heightPerformanceCalculator = new HeightPerformanceCalculator();
-//        return Arrays.asList(wmwPerformanceCalculator, accPerformanceCalculator);
         List<PerformanceCalculator> list = new ArrayList<PerformanceCalculator>();
         list.add(wmwPerformanceCalculator);
+//        list.add(accPerformanceCalculator);
         list.add(heightPerformanceCalculator);
 
         return list;
@@ -74,17 +82,29 @@ public class LearningStarter {
     }
 
     private WrongEntry performSubFold(Random r, List<PerformanceCalculator> calculators) {
-        ChromosomeOperator chromosomeOperator = new ChromosomeOperator(terminalOperator, calculators);
+        ChromosomeOperator chromosomeOperator = new ChromosomeOperator(terminalOperator, functionsForRads, calculators);
         PopulationBuilder builder = new PopulationBuilder(chromosomeOperator, r);
         ChromosomeRepository chromosomeRepository = new ChromosomeRepository(builder, r);
-        Learner learner = new Learner(calculators, chromosomeRepository,
-                radiographyRepository, chromosomeOperator, r);
+        List<Objective> objectives = createObjectivesList();
+
+        Learner learner = new Learner(chromosomeRepository,
+                radiographyRepository, chromosomeOperator, objectives, r, 200);
 
         List<Chromosome> paretoFront = learner.findParetoFront();
+//        EnsembleClassifier ensembleClassifier = new CompositeEnsembleClassifier(radiographyRepository, outputComputer, r);
         EnsembleClassifier ensembleClassifier = new VoteEnsembleClassifier(radiographyRepository, outputComputer);
+
 
         WrongEntry wrongEntry = ensembleClassifier.classify(paretoFront);
         return wrongEntry;
+    }
+
+    private List<Objective> createObjectivesList() {
+        List<Objective> objectives = new ArrayList<Objective>();
+        objectives.add(new WmwObjective());
+//        objectives.add(new AccObjective());
+        objectives.add(new HeightObjective());
+        return objectives;
     }
 
 }

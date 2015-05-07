@@ -6,8 +6,6 @@ import util.Tree;
 
 import java.util.*;
 
-import static model.functions.FunctionHelper.generateFunction;
-
 /*
  *  Contains a tree with the mapping of the functions and terminals and the fitness
  *  The mapping is done from 0 to the size of the terminals list - 1
@@ -18,10 +16,9 @@ public class Chromosome implements Comparable<Chromosome> {
     private double fitness;
     private List<PerformanceMeasure> performanceMeasures;
 
-    public Chromosome(Random r, List<PerformanceMeasure> measures) {
+    public Chromosome(int rootValue, List<PerformanceMeasure> measures) {
         this.performanceMeasures = measures;
-        int f = generateFunction(r);
-        representation = new Tree<Integer>(f);
+        representation = new Tree<Integer>(rootValue);
     }
 
     public Chromosome(Tree<Integer> tree, List<PerformanceMeasure> measures) {
