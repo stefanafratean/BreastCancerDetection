@@ -1,8 +1,6 @@
 package learning;
 
-import fitness.HeightPerformanceCalculator;
-import fitness.PerformanceCalculator;
-import fitness.WmwPerformanceCalculator;
+import fitness.*;
 import learning.ensembleclassifiers.CompositeEnsembleClassifier;
 import learning.ensembleclassifiers.EnsembleClassifier;
 import learning.ensembleclassifiers.VoteEnsembleClassifier;
@@ -10,6 +8,7 @@ import model.Chromosome;
 import model.functions.*;
 import model.objective.HeightObjective;
 import model.objective.Objective;
+import model.objective.WmwNegativeObjective;
 import model.objective.WmwObjective;
 import repository.ChromosomeRepository;
 import repository.PopulationBuilder;
@@ -57,10 +56,16 @@ public class LearningStarter {
 
     private List<PerformanceCalculator> getPerformanceCalculators() {
         PerformanceCalculator wmwPerformanceCalculator = new WmwPerformanceCalculator(outputComputer);
-//        PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(outputComputer);
+        PerformanceCalculator accPerformanceCalculator = new AccPerformanceCalculator(outputComputer);
+        PerformanceCalculator positiveAccPerformanceCalculator = new PositiveClassAccPerformanceCalculator(outputComputer);
+        PerformanceCalculator negativeAccPerformanceCalculator = new NegativeClassAccPerformanceCalculator(outputComputer);
         PerformanceCalculator heightPerformanceCalculator = new HeightPerformanceCalculator();
+        PerformanceCalculator wmwNegativePerformanceCalculator = new WmwNegativePerformanceCalculator(outputComputer);
         List<PerformanceCalculator> list = new ArrayList<PerformanceCalculator>();
+//        list.add(positiveAccPerformanceCalculator);
+//        list.add(negativeAccPerformanceCalculator);
         list.add(wmwPerformanceCalculator);
+        list.add(wmwNegativePerformanceCalculator);
 //        list.add(accPerformanceCalculator);
         list.add(heightPerformanceCalculator);
 
@@ -91,8 +96,8 @@ public class LearningStarter {
                 radiographyRepository, chromosomeOperator, objectives, r, 200);
 
         List<Chromosome> paretoFront = learner.findParetoFront();
-//        EnsembleClassifier ensembleClassifier = new CompositeEnsembleClassifier(radiographyRepository, outputComputer, r);
-        EnsembleClassifier ensembleClassifier = new VoteEnsembleClassifier(radiographyRepository, outputComputer);
+        EnsembleClassifier ensembleClassifier = new CompositeEnsembleClassifier(radiographyRepository, outputComputer, r);
+//        EnsembleClassifier ensembleClassifier = new VoteEnsembleClassifier(radiographyRepository, outputComputer);
 
 
         WrongEntry wrongEntry = ensembleClassifier.classify(paretoFront);
@@ -102,7 +107,10 @@ public class LearningStarter {
     private List<Objective> createObjectivesList() {
         List<Objective> objectives = new ArrayList<Objective>();
         objectives.add(new WmwObjective());
-//        objectives.add(new AccObjective());
+        objectives.add(new WmwNegativeObjective());
+        // one for positive class, one for negative class
+//        objectives.add(new PositiveClassAccObjective());
+//        objectives.add(new NegativeClassAccObjective());
         objectives.add(new HeightObjective());
         return objectives;
     }

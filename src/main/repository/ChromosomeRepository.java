@@ -178,7 +178,7 @@ public class ChromosomeRepository {
         while (it.hasNext()) {
             Chromosome chromosome = it.next();
             for (PerformanceMeasure measure : chromosome.getPerformanceMeasures()) {
-                if (measure.getValue() < 0.5d && it.hasNext()) {
+                if (measure.getValue() < 0.5d && it.hasNext() && population.size() != 1) {
                     it.remove();
                     break;
                 }

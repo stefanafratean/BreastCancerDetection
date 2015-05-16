@@ -38,7 +38,7 @@ public class CompositeEnsembleClassifier extends EnsembleClassifier {
         radRepoForMeta = new RadiographyRepository(radsForMetaClassifier);
 
         TerminalOperator terminalOperator = new TerminalOperator(paretoFrontChromosomes.size());
-        FunctionHelper functionHelper = new FunctionHelper(Arrays.<Function>asList(new And(), new Or(), new Vote()));
+        FunctionHelper functionHelper = new FunctionHelper(Arrays.<Function>asList(new And(), new Or(), new Vote(), new Xor()));
         List<PerformanceCalculator> performanceCalculators = new ArrayList<PerformanceCalculator>();
         outputComputerForMeta = new ChromosomeOutputComputer(terminalOperator, functionHelper);
         performanceCalculators.add(new LogicalFunctionPerformanceCalculator(outputComputerForMeta));
@@ -83,6 +83,12 @@ public class CompositeEnsembleClassifier extends EnsembleClassifier {
             } else {
                 outputs[i++] = 0d;
             }
+
+//            if (outputValue > 0) {
+//                outputs[i++] = 1d;
+//            } else {
+//                outputs[i++] = 0d;
+//            }
         }
         return outputs;
     }
