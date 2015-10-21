@@ -1,8 +1,6 @@
 package userInterface;
 
-import learning.ChromosomeOperator;
 import learning.LearningStarter;
-import learning.TerminalOperator;
 import repository.RadiographyRepository;
 import repository.extractors.ExtractorsAggregator;
 import repository.extractors.GLRLFeatureExtractor;
@@ -25,7 +23,7 @@ public class ConsoleInterface {
 
         RadiographyRepository radiographyRepository = new RadiographyRepository(extractors, file);
         LearningStarter learningStarter = new LearningStarter(radiographyRepository, extractors);
-        learningStarter.startLearning();
+        learningStarter.startLearning(fileName + "_" + extractors.toString());
     }
 
     private void printFilesOptions() {
@@ -66,7 +64,13 @@ public class ConsoleInterface {
             return new ExtractorsAggregator.Builder().haralick(new HaralickFeatureExtractor(file)).build();
         } else if (descriptor.equals("4")) {
             return new ExtractorsAggregator.Builder().moments(new MomentsExtractor(file)).glrl(new GLRLFeatureExtractor(file)).build();
-        } else {
+        } else if (descriptor.equals("5")) {
+            return new ExtractorsAggregator.Builder().moments(new MomentsExtractor(file)).haralick(new HaralickFeatureExtractor(file)).build();
+        } else if (descriptor.equals("6")) {
+            return new ExtractorsAggregator.Builder().glrl(new GLRLFeatureExtractor(file)).haralick(new HaralickFeatureExtractor(file)).build();
+        } else if (descriptor.equals("7")){
+            return new ExtractorsAggregator.Builder().moments(new MomentsExtractor(file)).glrl(new GLRLFeatureExtractor(file)).haralick(new HaralickFeatureExtractor(file)).build();
+        }else {
             System.out.println("Error: unknown desc type");
         }
 
@@ -79,6 +83,9 @@ public class ConsoleInterface {
         System.out.println("2. GLRL");
         System.out.println("3. Haralick");
         System.out.println("4. Moments + GLRL");
+        System.out.println("5. Moments + Haralick");
+        System.out.println("6. GLRL + Haralick");
+        System.out.println("7. Moments + GLRL + Haralick");
     }
 
     private String readString() {

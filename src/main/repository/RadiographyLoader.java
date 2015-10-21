@@ -45,10 +45,10 @@ public class RadiographyLoader {
                 try {
                     Radiography radiography;
                     if (tokens[1].trim().equals("n")) {
-                        radiography = new Radiography(false);
+                        radiography = new Radiography(false, tokens[0]);
                         normalRadNo++;
                     } else {
-                        radiography = new Radiography(true);
+                        radiography = new Radiography(true, tokens[0]);
                         cancerRadNo++;
                     }
                     radiographyList.add(radiography);

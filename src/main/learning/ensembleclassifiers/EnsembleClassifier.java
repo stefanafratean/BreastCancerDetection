@@ -10,13 +10,14 @@ import java.util.List;
 public abstract class EnsembleClassifier {
     protected RadiographyRepository radiographyRepository;
 
-    public WrongEntry classify(List<Chromosome> paretoFrontChromosomes) {
+    public WrongEntry classify(List<Chromosome> paretoFrontChromosomes, StringBuilder sb) {
         int negativeClassSize = getNegativeClassSize();
 
         int wrongCancer = 0;
         int wrongNormal = 0;
 
         performExtraTraining(paretoFrontChromosomes, negativeClassSize);
+//        sb.append("exp \n");
         for (Radiography r : radiographyRepository.getTestRadiographies()) {
 
             boolean withCancer = getParetoDecision(paretoFrontChromosomes, negativeClassSize, r);
@@ -28,7 +29,9 @@ public abstract class EnsembleClassifier {
                     wrongNormal++;
                 }
             }
+//            sb.append(r.getName()).append(" ").append(r.isWithCancer()).append(" ").append(withCancer).append("\n");
         }
+//        sb.append("\n");
 
         return new WrongEntry(wrongCancer, wrongNormal);
     }

@@ -47,6 +47,7 @@ public class Learner {
         evaluateBasedOnValidationSet();
 
         return chromosomeRepository.getChromosomeList();
+//     return Arrays.asList(chromosomeRepository.getChromosomeList().get(0));
     }
 
     private void evaluateBasedOnValidationSet() {

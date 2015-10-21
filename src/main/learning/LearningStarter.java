@@ -3,12 +3,10 @@ package learning;
 import fitness.*;
 import learning.ensembleclassifiers.CompositeEnsembleClassifier;
 import learning.ensembleclassifiers.EnsembleClassifier;
-import learning.ensembleclassifiers.VoteEnsembleClassifier;
 import model.Chromosome;
 import model.functions.*;
 import model.objective.HeightObjective;
 import model.objective.Objective;
-import model.objective.WmwNegativeObjective;
 import model.objective.WmwObjective;
 import repository.ChromosomeRepository;
 import repository.PopulationBuilder;
@@ -17,6 +15,9 @@ import repository.extractors.ExtractorsAggregator;
 import results.ResultsProcessor;
 import results.WrongEntry;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,19 +37,22 @@ public class LearningStarter {
         outputComputer = new ChromosomeOutputComputer(terminalOperator, functionsForRads);
     }
 
-    public void startLearning() {
+    public void startLearning(String fileName) {
         Random r = new Random();
 
         List<PerformanceCalculator> calculators = getPerformanceCalculators();
         int radiographyNb = radiographyRepository.getRadiographyNb();
         int cancerNb = radiographyRepository.getCancerRadNb();
-        int iterations = 10;
+        int iterations = 30;
         ResultsProcessor resProcessor = new ResultsProcessor(radiographyNb,
                 cancerNb, iterations);
 
         for (int i = 0; i < iterations; i++) {
-            WrongEntry wrongsPerCross = performCrossExperiment(r, calculators);
+//            StringBuilder sb = new StringBuilder();
+//            WrongEntry wrongsPerCross = performCrossExperiment(r, calculators, sb);
+            WrongEntry wrongsPerCross = performCrossExperiment(r, calculators, null);
             resProcessor.computeAndShowResults(wrongsPerCross);
+//            flushStringBuilder(sb, fileName);
         }
 
         resProcessor.computeAndShowGlobals();
@@ -65,17 +69,19 @@ public class LearningStarter {
 //        list.add(positiveAccPerformanceCalculator);
 //        list.add(negativeAccPerformanceCalculator);
         list.add(wmwPerformanceCalculator);
-        list.add(wmwNegativePerformanceCalculator);
+//        list.add(wmwNegativePerformanceCalculator);
 //        list.add(accPerformanceCalculator);
         list.add(heightPerformanceCalculator);
 
         return list;
     }
 
-    private WrongEntry performCrossExperiment(Random r, List<PerformanceCalculator> calculators) {
+    private WrongEntry performCrossExperiment(Random r, List<PerformanceCalculator> calculators, StringBuilder sb) {
         WrongEntry wrongsPerCross = new WrongEntry(0, 0);
-        for (int j = 0; j < 10; j++) {
-            WrongEntry wrongPerSubFold = performSubFold(r, calculators);
+        int subFoldsNumber = 5;
+//        sb.append("cross \n");
+        for (int j = 0; j < subFoldsNumber; j++) {
+            WrongEntry wrongPerSubFold = performSubFold(r, calculators, sb);
             wrongsPerCross.add(wrongPerSubFold);
             radiographyRepository.increaseCurrentSubset();
         }
@@ -86,7 +92,7 @@ public class LearningStarter {
         return wrongsPerCross;
     }
 
-    private WrongEntry performSubFold(Random r, List<PerformanceCalculator> calculators) {
+    private WrongEntry performSubFold(Random r, List<PerformanceCalculator> calculators, StringBuilder sb) {
         ChromosomeOperator chromosomeOperator = new ChromosomeOperator(terminalOperator, functionsForRads, calculators);
         PopulationBuilder builder = new PopulationBuilder(chromosomeOperator, r);
         ChromosomeRepository chromosomeRepository = new ChromosomeRepository(builder, r);
@@ -100,19 +106,37 @@ public class LearningStarter {
 //        EnsembleClassifier ensembleClassifier = new VoteEnsembleClassifier(radiographyRepository, outputComputer);
 
 
-        WrongEntry wrongEntry = ensembleClassifier.classify(paretoFront);
+        WrongEntry wrongEntry = ensembleClassifier.classify(paretoFront, sb);
         return wrongEntry;
+    }
+
+    private void flushStringBuilder(StringBuilder sb, String fileName) {
+        BufferedWriter br = null;
+        try {
+            br = new BufferedWriter(new FileWriter(fileName, true));
+            br.write(sb.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private List<Objective> createObjectivesList() {
         List<Objective> objectives = new ArrayList<Objective>();
         objectives.add(new WmwObjective());
-        objectives.add(new WmwNegativeObjective());
+//        objectives.add(new WmwNegativeObjective());
+//        objectives.add(new AccObjective());
         // one for positive class, one for negative class
 //        objectives.add(new PositiveClassAccObjective());
 //        objectives.add(new NegativeClassAccObjective());
         objectives.add(new HeightObjective());
         return objectives;
+
     }
 
 }

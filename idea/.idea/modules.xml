@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AccuracyExtraction/AccuracyExtraction.iml" filepath="$PROJECT_DIR$/AccuracyExtraction/AccuracyExtraction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CancerDet.iml" filepath="$PROJECT_DIR$/CancerDet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MepDataGeneration/MepDataGeneration.iml" filepath="$PROJECT_DIR$/MepDataGeneration/MepDataGeneration.iml" />
+    </modules>
+  </component>
+</project>

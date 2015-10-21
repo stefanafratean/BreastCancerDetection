@@ -1,0 +1,1352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6518b73c-6893-4408-8271-ecea2ec32c6d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/AccObjective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/AccPerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/results/AccuracyComputer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/And.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/AucPerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/AucValuesWrapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/CSSFeatureExtractor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/Chromosome.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/learning/ChromosomeOperator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/learning/ChromosomeOutputComputer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/ChromosomeRepository.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/ChromosomesSorter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/ChromosomesSorterTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/learning/ensembleclassifiers/CompositeEnsembleClassifier.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/ConfusionValuesWrapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/userInterface/ConsoleInterface.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Cosinus.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/CrowdingDistanceAwareComparator$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/CrowdingDistanceAwareComparator$OneObjectiveComparator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/CrowdingDistanceAwareComparator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/CrowdingDistanceAwareComparatorTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/CrowdingDistanceComputer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/learning/ensembleclassifiers/EnsembleClassifier.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/ExtractorsAggregator$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/ExtractorsAggregator$Builder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/ExtractorsAggregator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/FeatureExtractor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/util/File.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/FitnessHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Function.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/FunctionHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/GLRLFeatureExtractor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/GaborFeatureExtractor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/HOGFeatureExtractor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/HaralickFeatureExtractor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/HeightObjective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/HeightPerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/HeightPerformanceCalculatorTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/IfOperator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/jfeaturelib/JFeatureLib-1.6.0-jar-with-dependencies.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/jfeaturelib/JFeatureLib-1.6.0-javadoc.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/jfeaturelib/JFeatureLib-1.6.0-sources.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/jfeaturelib/JFeatureLib-1.6.0.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/learning/Learner.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/learning/LearningStarter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/util/ListUtil.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Logarithm.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/LogicalFunctionObjective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/LogicalFunctionPerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/main/Main.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/util/MathUtil.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/MaximizableObjective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/normalizers/MinMaxNormalizer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/MinimizableObjective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Minus.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/extractors/MomentsExtractor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Multiplier.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/NegativeClassAccObjective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/NegativeClassAccPerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/util/Node.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/Objective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/OneArgumentFunction.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Or.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/PerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/performancemeasure/PerformanceMeasure.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Plus.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/PopulationBuilder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/PopulationBuilderTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/PositiveClassAccObjective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/PositiveClassAccPerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/results/PrecisionComputer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/Radiography.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/RadiographyLoader.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/RadiographyRepository.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/normalizers/RadiographyValuesNormalizer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/results/RappelComputer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/results/ResultsProcessor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/SafeDivision.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Sinus.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Tangent.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/learning/TerminalOperator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/ThreeArgumentsFunction.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/util/Tree.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/util/TreeTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/TwoArgumentsFunction.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Vote.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/learning/ensembleclassifiers/VoteEnsembleClassifier.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/WmwNegativeObjective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/WmwNegativePerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/objective/WmwObjective.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/WmwPerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/fitness/WrongDecisionsPerformanceCalculator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/results/WrongEntry.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/model/functions/Xor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../bin/repository/normalizers/ZScoreNormalizer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/doctor.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/exitIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../forms-1.3.0.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/libCSSExtractor.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/libGLRLExtractor.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/libMomentsExtractor.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/liblinear-1.94.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/openIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/opencv_java248.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/pinkRibbon.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/seringa.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../.classpath" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AccuracyExtraction/AccuracyExtraction.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CancerDet.eml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CancerDet.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MepDataGeneration/MepDataGeneration.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Stefana.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../src/main/model/functions/Tangent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../axbh4fa1.gh1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/breastcancerdetection.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/breastcancerdetection.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module_cancerdet.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MepDataGeneration/module_mepdatageneration.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../.settings/org.eclipse.jdt.core.prefs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../resources/url.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/model/objective/AccObjective.java" afterPath="$PROJECT_DIR$/../src/main/model/objective/AccObjective.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/CompositeEnsembleClassifier.java" afterPath="$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/CompositeEnsembleClassifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/userInterface/ConsoleInterface.java" afterPath="$PROJECT_DIR$/../src/main/userInterface/ConsoleInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/EnsembleClassifier.java" afterPath="$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/EnsembleClassifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/repository/extractors/ExtractorsAggregator.java" afterPath="$PROJECT_DIR$/../src/main/repository/extractors/ExtractorsAggregator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/learning/Learner.java" afterPath="$PROJECT_DIR$/../src/main/learning/Learner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/learning/LearningStarter.java" afterPath="$PROJECT_DIR$/../src/main/learning/LearningStarter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/model/Radiography.java" afterPath="$PROJECT_DIR$/../src/main/model/Radiography.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/repository/RadiographyLoader.java" afterPath="$PROJECT_DIR$/../src/main/repository/RadiographyLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/repository/RadiographyRepository.java" afterPath="$PROJECT_DIR$/../src/main/repository/RadiographyRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/model/functions/SafeDivision.java" afterPath="$PROJECT_DIR$/../src/main/model/functions/SafeDivision.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/main/model/functions/TwoArgumentsFunction.java" afterPath="$PROJECT_DIR$/../src/main/model/functions/TwoArgumentsFunction.java" />
+    </list>
+    <ignored path="BreastCancerDetection.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/../bin/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="Commander">
+    <leftPanel />
+    <rightPanel />
+    <splitter proportion="0.5" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="BreastCancerDetection" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="LearningStarter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../src/main/learning/LearningStarter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4497529">
+              <caret line="117" column="33" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1253#1263#0" expanded="true" />
+                <element signature="e#3132#3155#0" expanded="true" />
+                <element signature="e#5766#5777#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompositeEnsembleClassifier.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/CompositeEnsembleClassifier.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VoteEnsembleClassifier.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/VoteEnsembleClassifier.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Learner.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/main/learning/Learner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+              <folding>
+                <element signature="e#2302#2303#0" expanded="true" />
+                <element signature="e#2366#2367#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChromosomeOutputComputer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/main/learning/ChromosomeOutputComputer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/../src/main/fitness/WmwPerformanceCalculator.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/testclassifiers/TestClassifier.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/testclassifiers/VoteClassifier.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/VoteClassifier.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/functions/FunctionHelper.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/TerminalOperator.java" />
+        <option value="$PROJECT_DIR$/../src/main/repository/FitnessHelper.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/CompositeClassifier.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/objective/LogicalFunctionObjective.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/functions/And.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/functions/Or.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/functions/Vote.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/ChromosomeOperator.java" />
+        <option value="$PROJECT_DIR$/../src/main/fitness/PositiveClassAccPerformanceCalculator.java" />
+        <option value="$PROJECT_DIR$/../src/main/fitness/NegativeClassAccPerformanceCalculator.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/objective/AccObjective.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/objective/NegativeClassAccObjective.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/objective/PositiveClassAccObjective.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/objective/WmwNegativeObjective.java" />
+        <option value="$PROJECT_DIR$/../src/main/fitness/WmwNegativePerformanceCalculator.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/functions/Xor.java" />
+        <option value="$PROJECT_DIR$/../src/main/fitness/LogicalFunctionPerformanceCalculator.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/functions/Tangent.java" />
+        <option value="$PROJECT_DIR$/../src/main/repository/ChromosomeRepository.java" />
+        <option value="$PROJECT_DIR$/../src/main/util/DivisionByZero.java" />
+        <option value="$PROJECT_DIR$/../src/main/fitness/AccPerformanceCalculator.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/ChromosomeOutputComputer.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/functions/TwoArgumentsFunction.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/functions/SafeDivision.java" />
+        <option value="$PROJECT_DIR$/../src/main/agents/behavior/LocalSelectBehavior.java" />
+        <option value="$PROJECT_DIR$/../src/main/agents/behavior/LocalImproveBehavior.java" />
+        <option value="$PROJECT_DIR$/../src/main/agents/behavior/ExternalImproveBehavior.java" />
+        <option value="$PROJECT_DIR$/../src/main/util/Tree.java" />
+        <option value="$PROJECT_DIR$/../src/main/util/Node.java" />
+        <option value="$PROJECT_DIR$/../src/main/agents/agent/SupervisingAgent.java" />
+        <option value="$PROJECT_DIR$/../src/main/agents/agent/LearningAgent.java" />
+        <option value="$PROJECT_DIR$/../src/main/agentimplementation/agent/Main.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/Chromosome.java" />
+        <option value="$PROJECT_DIR$/../src/main/agentimplementation/agent/LearningAgent.java" />
+        <option value="$PROJECT_DIR$/../src/main/agentimplementation/agent/MainAgent.java" />
+        <option value="$PROJECT_DIR$/../src/main/repository/RadiographyRepository.java" />
+        <option value="$PROJECT_DIR$/../src/main/model/Radiography.java" />
+        <option value="$PROJECT_DIR$/../src/main/repository/RadiographyLoader.java" />
+        <option value="$PROJECT_DIR$/../src/main/repository/extractors/FeatureExtractor.java" />
+        <option value="$PROJECT_DIR$/../src/main/repository/extractors/ExtractorsAggregator.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/EnsembleClassifier.java" />
+        <option value="$PROJECT_DIR$/../src/main/userInterface/ConsoleInterface.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/VoteEnsembleClassifier.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/Learner.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/CompositeEnsembleClassifier.java" />
+        <option value="$PROJECT_DIR$/../src/main/learning/LearningStarter.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreastCancerDetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreastCancerDetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreastCancerDetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreastCancerDetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreastCancerDetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreastCancerDetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreastCancerDetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreastCancerDetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreastCancerDetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="recentsLimit" value="5" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../Facultate/An1/Sem2/IntelligentAgents/jade/jade/lib/jade.jar!/" />
+    <property name="FullScreen" value="false" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
+    <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="breastcancerdetection" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="util" />
+      <recent name="repository" />
+      <recent name="model.objective" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+      <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="repository" />
+      <recent name="fitness" />
+      <recent name="util" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration default="false" name="MainAgent" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="agentimplementation.agent.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="agentimplementation.agent.MainAgent" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/.." />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="CancerDet" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/.." />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="CancerDet" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="TreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="CancerDet" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="util" />
+      <option name="MAIN_CLASS_NAME" value="util.TreeTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="HeightPerformanceCalculatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="fitness.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="CancerDet" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="fitness" />
+      <option name="MAIN_CLASS_NAME" value="fitness.HeightPerformanceCalculatorTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="All in CancerDet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="CancerDet" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Application.MainAgent" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.TreeTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.HeightPerformanceCalculatorTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.All in CancerDet" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="Application.MainAgent" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.All in CancerDet" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TreeTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.HeightPerformanceCalculatorTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6518b73c-6893-4408-8271-ecea2ec32c6d" name="Default" comment="" />
+      <created>1424536397017</created>
+      <option name="number" value="Default" />
+      <updated>1424536397017</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.77952754" sideWeight="0.5029542" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.9133858" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32755905" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23206443" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5816994" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3448819" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39869282" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.73070866" sideWeight="0.4970458" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.018897638" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.61417323" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../src/main/learning/Learner.java</url>
+          <line>87</line>
+          <properties />
+          <option name="timeStamp" value="162" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../src/main/learning/LearningStarter.java</url>
+          <line>135</line>
+          <properties />
+          <option name="timeStamp" value="163" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/CompositeEnsembleClassifier.java</url>
+          <line>53</line>
+          <properties />
+          <option name="timeStamp" value="164" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/CompositeEnsembleClassifier.java</url>
+          <line>97</line>
+          <properties />
+          <option name="timeStamp" value="172" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../src/main/repository/ChromosomeRepository.java</url>
+          <line>121</line>
+          <properties />
+          <option name="timeStamp" value="175" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../src/main/learning/Learner.java</url>
+          <line>88</line>
+          <properties />
+          <option name="timeStamp" value="181" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../src/main/learning/Learner.java</url>
+          <line>31</line>
+          <properties />
+          <option name="timeStamp" value="186" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../src/main/learning/Learner.java</url>
+          <line>42</line>
+          <properties />
+          <option name="timeStamp" value="187" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="188" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../src/main/learning/ChromosomeOutputComputer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/Sinus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/Logarithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/Multiplier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/IfOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07446808">
+          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/ConfusionValuesWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mias/MIASMoments.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/Function.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/Cosinus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_60/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="151" column="25" selection-start-line="151" selection-start-column="25" selection-end-line="151" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/Plus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/TwoArgumentsFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="61" selection-start-line="3" selection-start-column="61" selection-end-line="3" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_60/jre/lib/rt.jar!/sun/management/Agent.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22144112">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/util/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6573311">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/util/Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17298187">
+          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_60/src.zip!/java/util/Random.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.034596376">
+          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mias/MIAS.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/Chromosome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40197694">
+          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/Tangent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/SafeDivision.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1383855">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/repository/RadiographyRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.79571664">
+          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/repository/extractors/MomentsExtractor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/Radiography.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_60/src.zip!/java/lang/StringBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="207" column="25" selection-start-line="207" selection-start-column="25" selection-end-line="207" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/repository/RadiographyLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61449754">
+          <caret line="50" column="68" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../../../Licenta/workspace/CancerDetection/resources/jfeaturelib/JFeatureLib-1.6.0-jar-with-dependencies.jar!/org/apache/commons/io/FileUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9275862">
+          <caret line="111" column="13" selection-start-line="111" selection-start-column="13" selection-end-line="111" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_60/src.zip!/java/io/FileWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="11" selection-start-line="76" selection-start-column="11" selection-end-line="76" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/repository/extractors/FeatureExtractor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/util/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="18" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/repository/extractors/HOGFeatureExtractor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_60/src.zip!/java/lang/Class.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1150" column="5" selection-start-line="1150" selection-start-column="5" selection-end-line="1150" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/repository/extractors/ExtractorsAggregator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55024713">
+          <caret line="75" column="53" selection-start-line="75" selection-start-column="53" selection-end-line="75" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/learning/ChromosomeOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05882353">
+          <caret line="203" column="46" selection-start-line="203" selection-start-column="46" selection-end-line="203" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/repository/FitnessHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3113674">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/repository/ChromosomeRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="120" column="16" selection-start-line="120" selection-start-column="16" selection-end-line="120" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#845#846#0" expanded="false" />
+            <element signature="e#903#904#0" expanded="false" />
+            <element signature="e#3225#3226#0" expanded="false" />
+            <element signature="e#3265#3266#0" expanded="false" />
+            <element signature="e#6090#6091#0" expanded="false" />
+            <element signature="e#6123#6124#0" expanded="false" />
+            <element signature="e#6630#6631#0" expanded="false" />
+            <element signature="e#6688#6689#0" expanded="false" />
+            <element signature="e#7144#7145#0" expanded="false" />
+            <element signature="e#7217#7218#0" expanded="false" />
+            <element signature="e#7515#7516#0" expanded="false" />
+            <element signature="e#7566#7567#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/objective/AccObjective.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1383855">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/objective/PositiveClassAccObjective.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1383855">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/functions/And.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/model/objective/LogicalFunctionObjective.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14117648">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/learning/ChromosomeOutputComputer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/EnsembleClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/userInterface/ConsoleInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="87" column="41" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/fitness/WmwNegativePerformanceCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/fitness/WmwPerformanceCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+          <folding>
+            <element signature="e#402#403#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/results/AccuracyComputer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/results/ResultsProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/learning/Learner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+          <folding>
+            <element signature="e#2302#2303#0" expanded="true" />
+            <element signature="e#2366#2367#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/VoteEnsembleClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/learning/ensembleclassifiers/CompositeEnsembleClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/main/learning/LearningStarter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4497529">
+          <caret line="117" column="33" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1253#1263#0" expanded="true" />
+            <element signature="e#3132#3155#0" expanded="true" />
+            <element signature="e#5766#5777#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>CancerDet</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

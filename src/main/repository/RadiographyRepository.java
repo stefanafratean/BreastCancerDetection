@@ -26,7 +26,7 @@ public class RadiographyRepository {
     }
 
     private List<ArrayList<Radiography>> initializeSubsetsList(List<Radiography> radiographyList) {
-        int subsetsNo = 10;
+        int subsetsNo = 5;
 
         int subsetSize = radiographyList.size() / subsetsNo;
         List<ArrayList<Radiography>> subsetsList = new ArrayList<ArrayList<Radiography>>();

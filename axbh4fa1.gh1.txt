@@ -1,0 +1,37 @@
+﻿Added support for multiple performance measures.
+Fixed bug in crowding distance computation.
+Refactoring: clean up.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch mogp
+# Your branch is ahead of 'origin/mogp' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	modified:   src/main/wmwMeasure/AccPerformanceCalculator.java
+#	modified:   src/main/wmwMeasure/WmwPerformanceCalculator.java
+#	modified:   src/main/wmwMeasure/WrongDecisionsPerformanceCalculator.java
+#	modified:   src/main/learning/ChromosomeOperator.java
+#	modified:   src/main/learning/LearningStarter.java
+#	modified:   src/main/model/Chromosome.java
+#	modified:   src/main/model/performancemeasure/PerformanceMeasure.java
+#	modified:   src/main/repository/ChromosomeRepository.java
+#	new file:   src/main/repository/ChromosomesSorter.java
+#	new file:   src/main/repository/CrowdingDistanceAwareComparator.java
+#	new file:   src/main/repository/CrowdingDistanceComputer.java
+#	modified:   src/main/repository/FitnessHelper.java
+#	new file:   src/main/util/MathUtil.java
+#	new file:   src/test/repository/ChromosomesSorterTest.java
+#	new file:   src/test/repository/CrowdingDistanceAwareComparatorTest.java
+#
+# Untracked files:
+#	.classpath
+#	.project
+#	.settings/
+#	bin/
+#	forms-1.3.0.jar
+#	idea/
+#	resources/
+#
+

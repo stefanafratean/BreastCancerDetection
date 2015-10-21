@@ -22,7 +22,7 @@ import java.util.*;
 public class CompositeEnsembleClassifier extends EnsembleClassifier {
     private final ChromosomeOutputComputer outputComputer;
     private Random r;
-    private Chromosome compositeChr;
+    private List<Chromosome> compositeChromosomes;
     private RadiographyRepository radRepoForMeta;
     private ChromosomeOutputComputer outputComputerForMeta;
 
@@ -51,7 +51,7 @@ public class CompositeEnsembleClassifier extends EnsembleClassifier {
         objectives.add(new HeightObjective());
         Learner learner = new Learner(chromosomeRepository, radRepoForMeta, chromosomeOperator, objectives, r, 50);
 
-        compositeChr = learner.findParetoFront().get(0);
+        compositeChromosomes = learner.findParetoFront();
     }
 
     private List<Radiography> getMetaInput(List<Chromosome> paretoFrontChromosomes, int negativeClassSize) {
@@ -65,7 +65,7 @@ public class CompositeEnsembleClassifier extends EnsembleClassifier {
     }
 
     private Radiography getMetaRadiography(List<Chromosome> paretoFrontChromosomes, Radiography radiography, int negativeClassSize) {
-        Radiography newRadiography = new Radiography(radiography.isWithCancer());
+        Radiography newRadiography = new Radiography(radiography.isWithCancer(), "metaName");
         double[] outputs = computeNewDescriptors(paretoFrontChromosomes, radiography, negativeClassSize);
         newRadiography.addDescriptors(outputs);
         return newRadiography;
@@ -96,14 +96,19 @@ public class CompositeEnsembleClassifier extends EnsembleClassifier {
     @Override
     protected boolean getParetoDecision(List<Chromosome> paretoFrontChromosomes, int negativeClassSize, Radiography radiography) {
         Radiography metaRadiography = getMetaRadiography(paretoFrontChromosomes, radiography, negativeClassSize);
-        double output = outputComputerForMeta.getOutputValue(compositeChr, metaRadiography);
-        if (output == 1) {
-//        if (output > 0.5) {
-            return true;
-        } else if (output > 1) {
-            System.err.println("CompEnsembleClass: Something went wrong, output should be 0 or 1.");
+        int trueNumber = 0;
+        int falseNumber = 0;
+        for (Chromosome chromosome : compositeChromosomes) {
+            double output = outputComputerForMeta.getOutputValue(chromosome, metaRadiography);
+            if (output == 1) {
+                trueNumber++;
+            } else if (output > 1) {
+                System.err.println("CompEnsembleClass: Something went wrong, output should be 0 or 1.");
+            } else {
+                falseNumber++;
+            }
         }
-        return false;
+        return trueNumber > falseNumber;
     }
 
     private List<Double> getWmwInitialOutputs(Chromosome chromosome, RadiographyRepository radRepo, ChromosomeOutputComputer outputComputer) {

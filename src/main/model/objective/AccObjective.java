@@ -1,9 +1,7 @@
 package model.objective;
 
 import fitness.AccPerformanceCalculator;
-import fitness.NegativeClassAccPerformanceCalculator;
 import fitness.PerformanceCalculator;
-import fitness.PositiveClassAccPerformanceCalculator;
 import model.Chromosome;
 
 public class AccObjective extends MaximizableObjective {

@@ -6,10 +6,12 @@ import java.util.List;
 public class Radiography {
     private final boolean withCancer;
     private List<Double> features;
+    private String name;
 
-    public Radiography(boolean withCancer) {
+    public Radiography(boolean withCancer, String name) {
         features = new ArrayList<Double>();
         this.withCancer = withCancer;
+        this.name = name;
     }
 
     public void addDescriptors(double[] descriptorsList) {
@@ -24,5 +26,9 @@ public class Radiography {
 
     public List<Double> getFeatures() {
         return features;
+    }
+
+    public String getName() {
+        return name;
     }
 }

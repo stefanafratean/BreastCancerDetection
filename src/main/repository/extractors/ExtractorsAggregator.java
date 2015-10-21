@@ -67,4 +67,16 @@ public class ExtractorsAggregator {
     public List<FeatureExtractor> getAllExtractors() {
         return Arrays.asList(cssExtractor, gaborExtractor, glrlFeatureExtractor, haralickExtractor, hogFeatureExtractor, momentsExtractor);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (FeatureExtractor extractor : getAllExtractors()) {
+            if (extractor != null) {
+                sb.append(extractor.getClass().getSimpleName());
+            }
+        }
+        return sb.toString();
+    }
+
 }

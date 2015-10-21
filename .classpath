@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main"/>
+	<classpathentry kind="src" path="src/test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="D:/Info/Licenta/workspace/CancerDetection/resources/mockito-all-1.9.5.jar"/>
+	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
+	<classpathentry kind="lib" path="D:/Info/Licenta/workspace/CancerDetection/resources/jfeaturelib/JFeatureLib-1.6.0.jar"/>
+	<classpathentry kind="lib" path="D:/Info/Licenta/workspace/CancerDetection/resources/jfeaturelib/JFeatureLib-1.6.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="resources/liblinear-1.94.jar"/>
+	<classpathentry kind="lib" path="D:/Info/Facultate/An1/Sem2/IntelligentAgents/jade/jade/lib/jade.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

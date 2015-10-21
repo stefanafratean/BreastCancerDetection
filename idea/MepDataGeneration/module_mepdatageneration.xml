@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_mepdatageneration" default="compile.module.mepdatageneration">
+  <dirname property="module.mepdatageneration.basedir" file="${ant.file.module_mepdatageneration}"/>
+  
+  <property name="module.jdk.home.mepdatageneration" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mepdatageneration" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mepdatageneration" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mepdatageneration" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="mepdatageneration.output.dir" value="${module.mepdatageneration.basedir}/../out/production/MepDataGeneration"/>
+  <property name="mepdatageneration.testoutput.dir" value="${module.mepdatageneration.basedir}/../out/test/MepDataGeneration"/>
+  
+  <path id="mepdatageneration.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mepdatageneration.module.production.classpath">
+    <path refid="${module.jdk.classpath.mepdatageneration}"/>
+  </path>
+  
+  <path id="mepdatageneration.runtime.production.module.classpath">
+    <pathelement location="${mepdatageneration.output.dir}"/>
+  </path>
+  
+  <path id="mepdatageneration.module.classpath">
+    <path refid="${module.jdk.classpath.mepdatageneration}"/>
+    <pathelement location="${mepdatageneration.output.dir}"/>
+  </path>
+  
+  <path id="mepdatageneration.runtime.module.classpath">
+    <pathelement location="${mepdatageneration.testoutput.dir}"/>
+    <pathelement location="${mepdatageneration.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mepdatageneration">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mepdatageneration">
+    <patternset refid="excluded.from.module.mepdatageneration"/>
+  </patternset>
+  
+  <path id="mepdatageneration.module.sourcepath">
+    <dirset dir="${module.mepdatageneration.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mepdatageneration" depends="compile.module.mepdatageneration.production,compile.module.mepdatageneration.tests" description="Compile module MepDataGeneration"/>
+  
+  <target name="compile.module.mepdatageneration.production" depends="register.custom.compilers" description="Compile module MepDataGeneration; production classes">
+    <mkdir dir="${mepdatageneration.output.dir}"/>
+    <javac2 destdir="${mepdatageneration.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mepdatageneration}/javac">
+      <compilerarg line="${compiler.args.mepdatageneration}"/>
+      <bootclasspath refid="mepdatageneration.module.bootclasspath"/>
+      <classpath refid="mepdatageneration.module.production.classpath"/>
+      <src refid="mepdatageneration.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mepdatageneration"/>
+    </javac2>
+    
+    <copy todir="${mepdatageneration.output.dir}">
+      <fileset dir="${module.mepdatageneration.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mepdatageneration.tests" depends="register.custom.compilers,compile.module.mepdatageneration.production" description="compile module MepDataGeneration; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.mepdatageneration" description="cleanup module">
+    <delete dir="${mepdatageneration.output.dir}"/>
+    <delete dir="${mepdatageneration.testoutput.dir}"/>
+  </target>
+</project>
